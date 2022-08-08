@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{b5526e52-5c35-4268-a983-ec86e80d59db}</ProjectGuid>
+    <RootNamespace>GameDxlib</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(IncludePath);$(ProjectDir)\Src</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <IncludePath>$(IncludePath);$(ProjectDir)\Src</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);;$(ProjectDir)\Src</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);;$(ProjectDir)\Src</IncludePath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>C:\DxLib_VC3_23\DxLib_VC\プロジェクトに追加すべきファイル_VC用;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>C:\DxLib_VC3_23\DxLib_VC\プロジェクトに追加すべきファイル_VC用;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>C:\DxLib_VC3_23\DxLib_VC\プロジェクトに追加すべきファイル_VC用;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>C:\DxLib_VC3_23\DxLib_VC\プロジェクトに追加すべきファイル_VC用;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>C:\DxLib_VC3_23\DxLib_VC\プロジェクトに追加すべきファイル_VC用;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>C:\DxLib_VC3_23\DxLib_VC\プロジェクトに追加すべきファイル_VC用;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="Src\Mylib\GSlib\GSeasing.cpp" />
+    <ClCompile Include="Src\Actor\Actor.cpp" />
+    <ClCompile Include="Src\Actor\ActorManager.cpp" />
+    <ClCompile Include="Src\Mylib\Tween\TweenUnit.cpp" />
+    <ClCompile Include="Src\Rendering\AnimatedMesh.cpp" />
+    <ClCompile Include="Src\Assets.cpp" />
+    <ClCompile Include="Src\Collision\BoundingSphere.cpp" />
+    <ClCompile Include="Src\Actor\Camera\Camera.cpp" />
+    <ClCompile Include="Src\Mylib\DXlib_Input\Input.cpp" />
+    <ClCompile Include="Src\Mylib\DXlib_Input\InputManager.cpp" />
+    <ClCompile Include="Src\Mylib\DXlib_Input\MouseInput.cpp" />
+    <ClCompile Include="Src\Mylib\DXlib_Input\OnlyKeyInput.cpp" />
+    <ClCompile Include="Src\Rendering\Field.cpp" />
+    <ClCompile Include="Src\Scene\GamePlayScene.cpp" />
+    <ClCompile Include="Src\Game.cpp" />
+    <ClCompile Include="Src\Mylib\GSlib\GScollision.c" />
+    <ClCompile Include="Src\Mylib\GSlib\GSmatrix3.c" />
+    <ClCompile Include="Src\Mylib\GSlib\GSmatrix4.c" />
+    <ClCompile Include="Src\Mylib\GSlib\GSmatrix4_unity.cpp" />
+    <ClCompile Include="Src\Mylib\GSlib\GSplane.c" />
+    <ClCompile Include="Src\Mylib\GSlib\GSquaternion.c" />
+    <ClCompile Include="Src\Mylib\GSlib\GSquaternion_unity.cpp" />
+    <ClCompile Include="Src\Mylib\GSlib\GStransform_unity.cpp" />
+    <ClCompile Include="Src\Mylib\GSlib\GSvector2_unity.cpp" />
+    <ClCompile Include="Src\Mylib\GSlib\GSvector3.c" />
+    <ClCompile Include="Src\Mylib\GSlib\GSvector3_unity.cpp" />
+    <ClCompile Include="Src\Actor\Light\Light.cpp" />
+    <ClCompile Include="Src\main.cpp" />
+    <ClCompile Include="Src\Actor\Player\Player.cpp" />
+    <ClCompile Include="Src\Scene\SceneManager.cpp" />
+    <ClCompile Include="Src\Scene\TitleScene.cpp" />
+    <ClCompile Include="Src\World\World.cpp" />
+    <ClCompile Include="Src\Mylib\Tween\ValueUnit.cpp" />
+    <ClCompile Include="Src\Mylib\Tween\Tween.cpp" />
+    <ClCompile Include="Src\Mylib\Tween\Vector3Unit.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Src\Mylib\GSlib\GSeasing.h" />
+    <ClInclude Include="Src\Actor\Actor.h" />
+    <ClInclude Include="Src\Actor\ActorManager.h" />
+    <ClInclude Include="Src\Mylib\Tween\TweenUnit.h" />
+    <ClInclude Include="Src\Rendering\AnimatedMesh.h" />
+    <ClInclude Include="Src\Collision\BoundingSphere.h" />
+    <ClInclude Include="Src\Assets.h" />
+    <ClInclude Include="Src\Actor\Camera\Camera.h" />
+    <ClInclude Include="Src\Mylib\DXlib_Input\Input.h" />
+    <ClInclude Include="Src\Mylib\DXlib_Input\InputManager.h" />
+    <ClInclude Include="Src\Mylib\DXlib_Input\MouseInput.h" />
+    <ClInclude Include="Src\Mylib\DXlib_Input\OnlyKeyInput.h" />
+    <ClInclude Include="Src\Rendering\Field.h" />
+    <ClInclude Include="Src\Scene\GamePlayScene.h" />
+    <ClInclude Include="Src\Mylib\GSlib\GScollision.h" />
+    <ClInclude Include="Src\Mylib\GSlib\GSmath.h" />
+    <ClInclude Include="Src\Mylib\GSlib\GSmathf.h" />
+    <ClInclude Include="Src\Mylib\GSlib\GSmatrix3.h" />
+    <ClInclude Include="Src\Mylib\GSlib\GSmatrix4.h" />
+    <ClInclude Include="Src\Mylib\GSlib\GSplane.h" />
+    <ClInclude Include="Src\Mylib\GSlib\GSquaternion.h" />
+    <ClInclude Include="Src\Mylib\GSlib\GStransform.h" />
+    <ClInclude Include="Src\Mylib\GSlib\GStype.h" />
+    <ClInclude Include="Src\Mylib\GSlib\GSvector2.h" />
+    <ClInclude Include="Src\Mylib\GSlib\GSvector3.h" />
+    <ClInclude Include="Src\Mylib\GSlib\GSvector4.h" />
+    <ClInclude Include="Src\Scene\IScene.h" />
+    <ClInclude Include="Src\World\IWorld.h" />
+    <ClInclude Include="Src\Actor\Light\Light.h" />
+    <ClInclude Include="Src\Collision\Line.h" />
+    <ClInclude Include="Src\Actor\Player\Player.h" />
+    <ClInclude Include="Src\Collision\Ray.h" />
+    <ClInclude Include="Src\Scene\SceneManager.h" />
+    <ClInclude Include="Src\Scene\SceneNull.h" />
+    <ClInclude Include="Src\Rendering\Screen.h" />
+    <ClInclude Include="Src\Game.h" />
+    <ClInclude Include="Src\Mylib\Mylib.h" />
+    <ClInclude Include="Src\Scene\TitleScene.h" />
+    <ClInclude Include="Src\World\World.h" />
+    <ClInclude Include="Src\Mylib\Tween\ValueUnit.h" />
+    <ClInclude Include="Src\Mylib\Tween\Tween.h" />
+    <ClInclude Include="Src\Mylib\Tween\Vector3Unit.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
