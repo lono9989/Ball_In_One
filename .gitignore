@@ -433,3 +433,7 @@ FodyWeavers.xsd
 *.exe
 *.out
 *.app
+
+# GitHub
+[Ll]fs
+[Hh]ooks
