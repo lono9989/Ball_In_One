@@ -51,28 +51,24 @@ bool Field::collide(const Ray& ray, float max_distance, MV1_COLL_RESULT_POLY* re
 
 bool Field::collide(const BoundingSphere& sphere, MV1_COLL_RESULT_POLY_DIM* result, GSvector3* intersect) const
 {
-	*result =
-		MV1CollCheck_Sphere(field_Model, -1, sphere.center.VECTOR_, sphere.radius);
+	bool isend_{ false };
+	*result = MV1CollCheck_Sphere(field_Model, -1, sphere.center.VECTOR_, sphere.radius);
 
 	// 座標を求める
 	GSvector3 position = sphere.center;
-	GSvector3 target;
 
-	GSvector3 v = GSvector3{ 0.0f,0.0f,0.0f };
-	for (int i = 0; i < result->HitNum; ++i) {
-		MV1_COLL_RESULT_POLY pol = MV1CollCheck_GetResultPoly(*result, i);
+	Col(result, &position, sphere.radius);
+	while (!isend_) {
 
-		target.VECTOR_ = pol.HitPosition;
-		// 相手との距離
-		float distance = GSvector3::distance(position, target);
-
-		// 衝突判定球の重なっている長さを求める
-		float overlap = sphere.radius - distance;
-
-		// 重なっている部分の距離だけ離れる移動量を求める
-		v += (position - target).getNormalized() * overlap*0.7f;
+		MV1_COLL_RESULT_POLY_DIM a;
+		a = MV1CollCheck_Sphere(field_Model, -1, position.VECTOR_, sphere.radius);
+		if (a.HitNum > 0)
+		{
+			Col(&a, &position, sphere.radius);
+		}
+		else isend_ = true;
+		MV1CollResultPolyDimTerminate(a);
 	}
-	position += v;
 	*intersect = position;
 	// フィールドとの衝突判定
 	return result->HitNum > 0;
@@ -86,5 +82,15 @@ bool Field::is_inside(const GSvector3& position)const {
 
 bool Field::is_outside(const GSvector3& position)const {
 	return !is_inside(position);
+}
+
+void Field::Col(MV1_COLL_RESULT_POLY_DIM* a, GSvector3* position, float radius) const
+{
+	GSvector3 target;
+	for (int i = 0; i < a->HitNum; ++i) {
+		MV1_COLL_RESULT_POLY pol = MV1CollCheck_GetResultPoly(*a, i);
+		VECTOR v = Get_Triangle_Point_MinPosition(position->VECTOR_, pol.Position[0], pol.Position[1], pol.Position[2]);
+		position->VECTOR_ = VAdd(v, VScale(VNorm(VSub(position->VECTOR_, v)), radius * 1.01f));
+	}
 }
 

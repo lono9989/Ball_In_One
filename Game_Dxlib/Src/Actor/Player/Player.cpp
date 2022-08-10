@@ -159,10 +159,10 @@ void Player::Move(float delta_time)
 
 
 
-	if (OnlyKeyInput::GetKey(KEY_INPUT_W))velocity += forward;      // 前進
-	if (OnlyKeyInput::GetKey(KEY_INPUT_S))velocity -= forward;      // 後退
-	if (OnlyKeyInput::GetKey(KEY_INPUT_A)) velocity += right;       // 左
-	if (OnlyKeyInput::GetKey(KEY_INPUT_D)) velocity -= right;       // 右
+	if (InputManager::GetInput(InputType::KEY,KEY_INPUT_W))velocity += forward;      // 前進
+	if (InputManager::GetInput(InputType::KEY, KEY_INPUT_S))velocity -= forward;      // 後退
+	if (InputManager::GetInput(InputType::KEY, KEY_INPUT_A)) velocity += right;       // 左
+	if (InputManager::GetInput(InputType::KEY, KEY_INPUT_D)) velocity -= right;       // 右
 	velocity = velocity.normalized() * WalkSpeed * delta_time;
 
 	// 何もしなければアイドル状態
@@ -177,7 +177,7 @@ void Player::Move(float delta_time)
 		transform_.rotation(rotation);
 		// 移動中のモーションにする
 		motion = AnimWalking;
-		if (OnlyKeyInput::GetKey(KEY_INPUT_LSHIFT)) {
+		if (InputManager::GetInput(InputType::KEY, KEY_INPUT_LSHIFT)) {
 			velocity*= Runningmagni;
 			motion = AnimRunning;
 		}

@@ -10,14 +10,14 @@
 void GamePlayScene::load()
 {
 
-	//Assets::Mesh_Skydome = MV1LoadModel("Assets/Model/Skydome_Q1/Dome_Q102.pmx");
+	//Assets::Mesh_Skydome = MV1LoadModel("");
 	Assets::Mesh_Field = MV1LoadModel("Assets/Model/Field/untitled1.mv1");
-	//Assets::Mesh_Player = MV1LoadModel("Assets/Model/Chara/宇志海いちご/宇志海いちご.mv1");
-	//Assets::VShader_MMD = LoadVertexShader("Assets/Shader/MMDTwone.vso");
-	//Assets::PShader_MMD = LoadPixelShader("Assets/Shader/MMDTwoneP.pso");
-	//Assets::VShader_Normal = LoadVertexShader("Assets/Shader/Normal.vso");
-	//Assets::PShader_Normal = LoadPixelShader("Assets/Shader/NormalP.pso");
-	//Assets::Texture_GradPlayer = LoadGraph("Assets/Model/Chara/宇志海いちご/toonuk.png");
+	//Assets::Mesh_Player = MV1LoadModel("");
+	//Assets::VShader_MMD = LoadVertexShader("");
+	//Assets::PShader_MMD = LoadPixelShader("");
+	//Assets::VShader_Normal = LoadVertexShader("");
+	//Assets::PShader_Normal = LoadPixelShader("");
+	//Assets::Texture_GradPlayer = LoadGraph("");
 
 }
 
@@ -31,7 +31,7 @@ void GamePlayScene::start() {
 
 	//スカイドームはZバッファを使わない
 	MV1SetUseZBuffer(Assets::Mesh_Skydome, FALSE);
-	
+	MV1SetScale(Assets::Mesh_Field, VGet(0.1f, 0.1f, 0.1f));
 	// フィールドクラスの追加
 	world_.add_field(new Field{ Assets::Mesh_Field});
 	//カメラクラスの追加
@@ -48,18 +48,11 @@ void GamePlayScene::start() {
 }
 
 //更新
-void GamePlayScene::update(float delta_time) {
-	
-
+void GamePlayScene::update(float delta_time) 
+{
 	//エンターキーで終了としておく
-	if (OnlyKeyInput::GetKeyDown(KEY_INPUT_RETURN)) {
-		timer_++;
-		if (timer_ == 1) {
+	if (InputManager::GetInputDown(InputType::KEY, KEY_INPUT_RETURN)) {
 			is_end_ = true; //シーン終了
-		}
-	}
-	else {
-		timer_ = 0;
 	}
 
 	//ワールドの更新

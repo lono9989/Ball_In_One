@@ -29,6 +29,7 @@ public:
 	//フィールド外か
 	bool is_outside(const GSvector3& posiition) const;
 
+	void Col(MV1_COLL_RESULT_POLY_DIM* a, GSvector3* position, float radius)const;
 
 	//コピー禁止
 	Field(const Field& other) = default;

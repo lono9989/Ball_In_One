@@ -1,16 +1,25 @@
 #ifndef INPUT_MANAGER_H_
 #define INPUT_MANAGER_H_
 
-#include "Input.h"
-#include "OnlyKeyInput.h"
-#include "MouseInput.h"
+enum class InputType {
+	KEY,
+	PAD,
+	MOUSE
+};
+
 /// <summary>
-/// Init,Update用クラス
+/// 管理用クラス
 /// </summary>
-class InputManager {
+static class InputManager {
+public: 
+	
 public:
 	static void Init();
 	static void Update();
+
+	static bool GetInput(InputType type,int buttonId);
+	static bool GetInputDown(InputType type, int buttonId);
+	static bool GetInputUp(InputType type, int buttonId);
 };
 
 #endif // !INPUT_MANAGER_H_

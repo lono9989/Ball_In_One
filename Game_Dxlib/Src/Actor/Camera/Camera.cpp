@@ -5,6 +5,7 @@
 #include "Mylib/Mylib.h"
 #include "Collision/Line.h"
 #include "Rendering/Field.h"
+#include "Mylib/Dxlib_Input/MouseInput.h"
 
 #include <string>
 

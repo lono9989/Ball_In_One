@@ -2,7 +2,8 @@
 #include "Scene/TitleScene.h"
 #include "Scene/GamePlayScene.h"
 
-Game::~Game() {
+Game::~Game() 
+{
 	//シーンの終了
 	scene_manager_.end();
 }
@@ -22,14 +23,16 @@ void Game::Init()
 }
 
 void Game::Update(float delta_time)
-{// 更新処理
+{
+	// 更新処理
 	InputManager::Update();
 	//シーンの更新
 	scene_manager_.update(delta_time);
 }
 
 void Game::Draw()
-{// 描画処理
+{
+	// 描画処理
 
 	//シーンの描画
 	scene_manager_.draw();

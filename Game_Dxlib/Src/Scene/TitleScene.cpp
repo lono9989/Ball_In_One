@@ -16,14 +16,8 @@ void TitleScene::start() {
 //更新
 void TitleScene::update(float delta_time) {
 	//エンターキー押したらシーン終了
-	if (OnlyKeyInput::GetKeyDown(KEY_INPUT_RETURN)) {
-		timer_++;
-		if (timer_ == 1) {
-			is_end_ = true; //シーン終了
-		}
-	}
-	else {
-		timer_ = 0;
+	if (InputManager::GetInputDown(InputType::KEY, KEY_INPUT_RETURN)) {
+		is_end_ = true; //シーン終了
 	}
 }
 
