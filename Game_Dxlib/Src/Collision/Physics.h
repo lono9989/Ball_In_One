@@ -13,6 +13,9 @@ public:
 	Physics(BoundingSphere* sphere,GStransform* transform,GSvector3 v = GSvector3{ 0.0f,0.0f,0.0f }, GSvector3 angv = GSvector3{ 0.0f,0.0f,0.0f });
 	~Physics();
 
+	void Update(float delta_time);
+
+	//力を加える
 	void AddForce(GSvector3 power);
 
 
@@ -21,6 +24,8 @@ public:
 	void SetVelocity(GSvector3 v);
 	GSvector3 GetAngulerVelocity();
 	void SetAngulerVelocity(GSvector3 v);
+	/*float GetMass();
+	void SetMass(float mass);*/
 private:
 	//フィールドとの当たり判定
 	void CollideField();
@@ -33,6 +38,8 @@ private:
 	GSvector3 velocity_;
 	//回転速度
 	GSvector3 anguler_velocity_;
+	////質量 
+	//float mass_{1.0f};
 
 	bool freezePosition[3]{ false,false,false };
 	bool freezeRotation[3]{ false,false,false };
