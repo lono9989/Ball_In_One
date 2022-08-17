@@ -53,6 +53,7 @@ bool Field::collide(const BoundingSphere& sphere, MV1_COLL_RESULT_POLY_DIM* resu
 {
 	bool isend_{ false };
 	*result = MV1CollCheck_Sphere(field_Model, -1, sphere.center.VECTOR_, sphere.radius);
+	if (intersect != nullptr) {
 
 	// 座標を求める
 	GSvector3 position = sphere.center;
@@ -70,6 +71,7 @@ bool Field::collide(const BoundingSphere& sphere, MV1_COLL_RESULT_POLY_DIM* resu
 		MV1CollResultPolyDimTerminate(a);
 	}
 	*intersect = position;
+	}
 	// フィールドとの衝突判定
 	return result->HitNum > 0;
 }

@@ -3,14 +3,16 @@
 
 #include "Mylib/Mylib.h"
 #include "DxLib.h"
+#include "World/IWorld.h"
 
 class BoundingSphere;
 
 //簡易物理演算クラス
 class Physics {
 public:
+	Physics();
 	//球体用(他に必要な形が出てきたときはコンストラクタを別個オーバーロードしてください。)
-	Physics(BoundingSphere* sphere,GStransform* transform,GSvector3 v = GSvector3{ 0.0f,0.0f,0.0f }, GSvector3 angv = GSvector3{ 0.0f,0.0f,0.0f });
+	Physics(IWorld* world, BoundingSphere* sphere, GStransform* transform, GSvector3 v = GSvector3{ 0.0f,0.0f,0.0f }, GSvector3 angv = GSvector3{ 0.0f,0.0f,0.0f });
 	~Physics();
 
 	void Update(float delta_time);
@@ -30,19 +32,21 @@ private:
 	//フィールドとの当たり判定
 	void CollideField();
 private:
-	//トランスフォームのポインター(本当だったらこっちに置きたい)←今後の変更課題
-	GStransform* transform_;
-	//コライダーのポインター これも同上(なんだったらまとめれるものを作りたい)
-	BoundingSphere* sphere_;
+	IWorld* world_{ nullptr };
+	//トランスフォーム
+	GStransform* transform_{nullptr};
+	//コライダーのポインター (なんだったらまとめれるものを作りたい)
+	BoundingSphere* sphere_{ nullptr };
 	//速度
 	GSvector3 velocity_;
 	//回転速度
 	GSvector3 anguler_velocity_;
-	////質量 
-	//float mass_{1.0f};
 
+	//まだ反映させてない
 	bool freezePosition[3]{ false,false,false };
 	bool freezeRotation[3]{ false,false,false };
+	////質量 
+	//float mass_{1.0f};
 };
 
 

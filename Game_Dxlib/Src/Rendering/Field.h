@@ -23,7 +23,7 @@ public:
 	// レイとの衝突判定
 	bool collide(const Ray& ray, float max_distance, MV1_COLL_RESULT_POLY* result) const;
 	// 球体との衝突判定
-	bool collide(const BoundingSphere& sphere, MV1_COLL_RESULT_POLY_DIM* result,GSvector3* intersect) const;
+	bool collide(const BoundingSphere& sphere, MV1_COLL_RESULT_POLY_DIM* result,GSvector3* intersect=nullptr) const;
 	//フィールド内か
 	bool is_inside(const GSvector3& position) const;
 	//フィールド外か

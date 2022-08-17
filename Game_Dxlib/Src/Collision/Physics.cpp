@@ -1,14 +1,21 @@
 #include "Collision/Physics.h"
 #include "Collision/BoundingSphere.h"
+#include "Rendering/Field.h"
 
 //重力加速度
 const float Gravity{ -0.980665f };
 
 
-Physics::Physics(BoundingSphere* sphere, GStransform* transform, GSvector3 v, GSvector3 angv) :
-	sphere_{ sphere }, transform_{ transform },
+Physics::Physics()
+{
+}
+
+Physics::Physics(IWorld* world, BoundingSphere* sphere, GStransform* transform,GSvector3 v, GSvector3 angv) :
 	velocity_{ v }, anguler_velocity_{ angv }
 {
+	world_ = world;
+	sphere_ = sphere;
+	transform_ = transform;
 }
 
 Physics::~Physics()
@@ -18,11 +25,11 @@ Physics::~Physics()
 void Physics::Update(float delta_time)
 {
 	//重力
-	velocity_.y += Gravity;
+	velocity_.y += Gravity * delta_time;
 
 	//速度系計算
-	velocity_ *= 0.8f;
-	anguler_velocity_ *= 0.8f;
+	//velocity_ *= 0.8f * delta_time;
+	//anguler_velocity_ *= 0.8f * delta_time;
 
 	//トランスフォーム反映
 	transform_->translate(velocity_, GStransform::Space::World);
@@ -74,4 +81,18 @@ void Physics::SetAngulerVelocity(GSvector3 v)
 void Physics::CollideField()
 {
 	//ここにいろいろ書く
+	MV1_COLL_RESULT_POLY_DIM polydim;
+	if (world_->field()->collide(sphere_->transform(transform_->localToWorldMatrix()), &polydim)) {
+		GSvector3 saveV = velocity_;
+		velocity_.normalized();
+		GSvector3 normV{0.0f,0.0f,0.0f};
+		for (int i = 0; i < polydim.HitNum; i++) {
+			VAdd(normV.VECTOR_, polydim.Dim[i].Normal);
+			normV.normalized();
+		}
+		velocity_ += 2 * normV;
+		velocity_ *= VSize(saveV.VECTOR_);
+
+	}
+	MV1CollResultPolyDimTerminate(polydim);
 }

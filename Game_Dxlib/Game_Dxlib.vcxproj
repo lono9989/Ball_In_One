@@ -149,6 +149,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Src\Ball.cpp" />
     <ClCompile Include="Src\Collision\Physics.cpp" />
     <ClCompile Include="Src\Mylib\GSlib\GSeasing.cpp" />
     <ClCompile Include="Src\Actor\Actor.cpp" />
@@ -187,6 +188,7 @@
     <ClCompile Include="Src\Mylib\Tween\Vector3Unit.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Src\Ball.h" />
     <ClInclude Include="Src\Collision\Physics.h" />
     <ClInclude Include="Src\Mylib\GSlib\GSeasing.h" />
     <ClInclude Include="Src\Actor\Actor.h" />

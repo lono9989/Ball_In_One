@@ -5,6 +5,7 @@
 #include"Mylib/Mylib.h"
 #include<string>
 #include"Collision/BoundingSphere.h"
+#include "Collision/Physics.h"
 
 class IWorld; //ワールド抽象インターフェイスの前方宣言
 
@@ -70,6 +71,9 @@ protected:
 	std::string tag_;
 	//名前
 	std::string name_;
+
+	//ennzann
+	Physics physics_;
 	//トランスフォーム
 	GStransform transform_;
 	//移動量

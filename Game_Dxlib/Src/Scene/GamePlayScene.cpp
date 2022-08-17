@@ -6,6 +6,8 @@
 #include "Actor/Light/Light.h"
 #include "Mylib/DXlib_Input/InputManager.h"
 
+#include "Ball.h"
+
 
 void GamePlayScene::load()
 {
@@ -41,6 +43,7 @@ void GamePlayScene::start() {
 	//プレイヤの追加
 	world_.add_actor(new Player{ &world_,Assets::Mesh_Player,GSvector3{0.0f,0.0f,0.0f} });
 
+	world_.add_actor(new Ball(&world_, GSvector3{ 0.0f,10.0f,0.0f }));
 
 	//終了フラグを初期化
 	is_end_ = false;
