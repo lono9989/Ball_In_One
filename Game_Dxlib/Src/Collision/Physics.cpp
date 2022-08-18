@@ -30,6 +30,8 @@ void Physics::Update(float delta_time)
 	//速度系計算
 	//velocity_ *= 0.8f * delta_time;
 	//anguler_velocity_ *= 0.8f * delta_time;
+	//衝突計算
+	CollideField();
 
 	//トランスフォーム反映
 	transform_->translate(velocity_, GStransform::Space::World);
@@ -37,9 +39,6 @@ void Physics::Update(float delta_time)
 		GSvector3{ anguler_velocity_.z,0.0f,anguler_velocity_.x }
 		/ (2.0f * GS_PI * sphere_->radius) * 360.0f,
 		GStransform::Space::World);
-
-	//衝突計算
-	CollideField();
 }
 
 void Physics::AddForce(GSvector3 power)
@@ -83,15 +82,26 @@ void Physics::CollideField()
 	//ここにいろいろ書く
 	MV1_COLL_RESULT_POLY_DIM polydim;
 	if (world_->field()->collide(sphere_->transform(transform_->localToWorldMatrix()), &polydim)) {
-		GSvector3 saveV = velocity_;
-		velocity_.normalized();
-		GSvector3 normV{0.0f,0.0f,0.0f};
+		//速度を保持
+		GSvector3 Vvec = velocity_;
+		//大きさ
+		float scale = VSize(Vvec.VECTOR_);
+
+		GSvector3 normV{ 0.0f,0.0f,0.0f };
 		for (int i = 0; i < polydim.HitNum; i++) {
-			VAdd(normV.VECTOR_, polydim.Dim[i].Normal);
-			normV.normalized();
+			normV.VECTOR_=VAdd(normV.VECTOR_, polydim.Dim[i].Normal);
+			normV=normV.normalized();
 		}
-		velocity_ += 2 * normV;
-		velocity_ *= VSize(saveV.VECTOR_);
+		Ray ray{ transform_->position(),normV };
+		MV1_COLL_RESULT_POLY res;
+		world_->field()->collide(ray, 100.0f, &res);
+
+		
+		GSvector3 dis = res.HitPosition-(-normV * sphere_->radius);
+
+		velocity_ = transform_->position() - polydim.Dim[0].HitPosition;
+		velocity_ = (velocity_ + 2 * dis).normalized() * scale;
+		transform_->translate(dis * 2, GStransform::Space::World);
 
 	}
 	MV1CollResultPolyDimTerminate(polydim);

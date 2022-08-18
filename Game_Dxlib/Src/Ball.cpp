@@ -18,6 +18,9 @@ Ball::Ball(IWorld* world, const GSvector3& position)
 void Ball::update(float delta_time)
 {
 	physics_.Update(delta_time);
+	if (InputManager::GetInputDown(InputType::KEY, KEY_INPUT_G)) {
+		physics_.AddForce(GSvector3{ 0.5f,-0.5f,0.0f });
+	}
 }
 
 void Ball::react(Actor& other)
@@ -27,4 +30,6 @@ void Ball::react(Actor& other)
 void Ball::draw() const
 {
 	collider().draw();
+	std::string str = std::to_string(transform_.position().x) + "," + std::to_string(transform_.position().y) + "," + std::to_string(transform_.position().z);
+	DrawString(80, 245, str.c_str(), GetColor(255, 255, 255));
 }
