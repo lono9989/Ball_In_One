@@ -10,7 +10,7 @@ Physics::Physics()
 {
 }
 
-Physics::Physics(IWorld* world, BoundingSphere* sphere, GStransform* transform,GSvector3 v, GSvector3 angv) :
+Physics::Physics(IWorld* world, BoundingSphere* sphere, GStransform* transform, GSvector3 v, GSvector3 angv) :
 	velocity_{ v }, anguler_velocity_{ angv }
 {
 	world_ = world;
@@ -89,20 +89,30 @@ void Physics::CollideField()
 
 		GSvector3 normV{ 0.0f,0.0f,0.0f };
 		for (int i = 0; i < polydim.HitNum; i++) {
-			normV.VECTOR_=VAdd(normV.VECTOR_, polydim.Dim[i].Normal);
-			normV=normV.normalized();
+			normV.VECTOR_ = VAdd(normV.VECTOR_, polydim.Dim[i].Normal);
+			normV = normV.normalized();
 		}
-		Ray ray{ transform_->position(),normV };
-		MV1_COLL_RESULT_POLY res;
-		world_->field()->collide(ray, 100.0f, &res);
 
-		
-		GSvector3 dis = res.HitPosition-(-normV * sphere_->radius);
+		Ray ray{ sphere_->center ,velocity_ };
 
-		velocity_ = transform_->position() - polydim.Dim[0].HitPosition;
-		velocity_ = (velocity_ + 2 * dis).normalized() * scale;
-		transform_->translate(dis * 2, GStransform::Space::World);
+		MV1_COLL_RESULT_POLY poly;
+		world_->field()->collide(ray, sphere_->radius, &poly);
+		if (poly.HitFlag == FALSE) {
+			ray.direction = -ray.direction;
+			world_->field()->collide(ray, sphere_->radius, &poly);
+		}
 
+		GSvector3 pos = poly.HitPosition + (velocity_.normalized() * sphere_->radius);
+		velocity_ = pos - poly.HitPosition;
+
+		ray.position = pos;
+		ray.direction = normV;
+
+		world_->field()->collide(ray, sphere_->radius + 0.5f, &poly);
+
+		GSvector3 distance = poly.HitPosition - velocity_;
+
+		velocity_ = (velocity_+(2*distance)).normalized()*scale;
 	}
 	MV1CollResultPolyDimTerminate(polydim);
 }
