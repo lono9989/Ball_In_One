@@ -28,7 +28,7 @@ void Physics::Update(float delta_time)
 	velocity_.y += Gravity * delta_time;
 
 	//‘¬“xŒnŒvŽZ
-	//velocity_ *= 0.8f * delta_time;
+	//velocity_ *= 0.925f * delta_time;
 	//anguler_velocity_ *= 0.8f * delta_time;
 	//Õ“ËŒvŽZ
 	CollideField();
@@ -67,6 +67,16 @@ void Physics::SetAngulerVelocity(GSvector3 v)
 	anguler_velocity_ = v;
 }
 
+float Physics::GetBounciness()
+{
+	return bounciness_;
+}
+
+void Physics::SetBounciness(float bounce)
+{
+	bounciness_ = bounce;
+}
+
 //float Physics::GetMass()
 //{
 //	return mass_;
@@ -80,12 +90,16 @@ void Physics::SetAngulerVelocity(GSvector3 v)
 void Physics::CollideField()
 {
 	//‚±‚±‚É‚¢‚ë‚¢‚ë‘‚­
+
 	MV1_COLL_RESULT_POLY_DIM polydim;
-	if (world_->field()->collide(sphere_->transform(transform_->localToWorldMatrix()), &polydim)) {
+	GSvector3 intersect;
+	if (world_->field()->collide(sphere_->transform(transform_->localToWorldMatrix()), &polydim, &intersect)) {
+		transform_->position(intersect);
 		//‘¬“x‚ð•ÛŽ
 		GSvector3 Vvec = velocity_;
 		//‘å‚«‚³
-		float scale = VSize(Vvec.VECTOR_);
+		float scale = velocity_.length();
+		scale = MAX(0.001f,scale * CLAMP(((bounciness_ + world_->field()->Bounciness) / 2), 0.0f, 1.0f));
 
 		GSvector3 normV{ 0.0f,0.0f,0.0f };
 		for (int i = 0; i < polydim.HitNum; i++) {
@@ -112,7 +126,8 @@ void Physics::CollideField()
 
 		GSvector3 distance = poly.HitPosition - velocity_;
 
-		velocity_ = (velocity_+(2*distance)).normalized()*scale;
+		velocity_ = (velocity_ + (2 * distance)).normalized() * scale;
+
 	}
-	MV1CollResultPolyDimTerminate(polydim);
+	DxLib::MV1CollResultPolyDimTerminate(polydim);
 }

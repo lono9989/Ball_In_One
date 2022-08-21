@@ -26,6 +26,8 @@ public:
 	void SetVelocity(GSvector3 v);
 	GSvector3 GetAngulerVelocity();
 	void SetAngulerVelocity(GSvector3 v);
+	float GetBounciness();
+	void SetBounciness(float bounce);
 	/*float GetMass();
 	void SetMass(float mass);*/
 private:
@@ -41,6 +43,9 @@ private:
 	GSvector3 velocity_;
 	//‰ñ“]‘¬“x
 	GSvector3 anguler_velocity_;
+
+	//”½”­ŒW”
+	float bounciness_{0.0f};
 
 	//‚Ü‚¾”½‰f‚³‚¹‚Ä‚È‚¢
 	bool freezePosition[3]{ false,false,false };

@@ -66,6 +66,7 @@ bool Field::collide(const BoundingSphere& sphere, MV1_COLL_RESULT_POLY_DIM* resu
 		if (a.HitNum > 0)
 		{
 			Col(&a, &position, sphere.radius);
+			
 		}
 		else isend_ = true;
 		MV1CollResultPolyDimTerminate(a);

@@ -1,5 +1,7 @@
 #include "Ball.h"
 
+#include "Mylib/Debug/Debug.h"
+
 Ball::Ball(IWorld* world, const GSvector3& position)
 {
 	// ƒ[ƒ‹ƒh‚ğİ’è
@@ -13,6 +15,7 @@ Ball::Ball(IWorld* world, const GSvector3& position)
 	// À•W‚Ì‰Šú‰»
 	transform_.position(position);
 	physics_ = Physics{ world_,&collider_,&transform_ };
+	physics_.SetBounciness(0.7f);
 }
 
 void Ball::update(float delta_time)
@@ -29,6 +32,7 @@ void Ball::react(Actor& other)
 
 void Ball::draw() const
 {
+	Debug::DrawCoordinateAxis(transform_);
 	collider().draw();
 	std::string str = std::to_string(transform_.position().x) + "," + std::to_string(transform_.position().y) + "," + std::to_string(transform_.position().z);
 	DrawString(80, 245, str.c_str(), GetColor(255, 255, 255));

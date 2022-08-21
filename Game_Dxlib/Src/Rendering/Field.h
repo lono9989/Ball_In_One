@@ -35,6 +35,8 @@ public:
 	Field(const Field& other) = default;
 	Field& operator=(const Field& other) = default;
 
+public:
+	const float Bounciness{ 0.5f };
 private:
 	//”wŒi‰æ‘œ
 	GSuint bg_{ 0 };
