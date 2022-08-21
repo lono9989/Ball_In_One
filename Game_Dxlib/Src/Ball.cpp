@@ -1,6 +1,6 @@
 #include "Ball.h"
 
-#include "Mylib/Debug/Debug.h"
+#include "Mylib/Debug.h"
 
 Ball::Ball(IWorld* world, const GSvector3& position)
 {
