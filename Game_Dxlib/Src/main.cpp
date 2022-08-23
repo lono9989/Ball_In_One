@@ -16,13 +16,16 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
     // Direct3D9Ex を使用する
     SetUseDirect3DVersion(DX_DIRECT3D_9EX);
+    SetOutApplicationLogValidFlag(FALSE);//ログを出力するかどうか
 
     // 画面モードの設定
+    SetAlwaysRunFlag(FALSE);//アクティブ状態でなくとも処理を実行するかどうか
     SetGraphMode(Screen::Width, Screen::Height, 32); // 画面サイズ960×540のカラービット数32ビットで起動
     SetWindowSize(Screen::Width, Screen::Height);// ウィンドウサイズ960×540(こことSetGraphModeのサイズが異なると画像がゆがむ)
     ChangeWindowMode(TRUE);//フルスクリーン表示かウィンドウ表示か
     SetMouseDispFlag(TRUE);// ここをFALSEにするとマウスカーソル非表示
-    SetMainWindowText("ゲームのウィンドウ名を変えるときはここ");//この行でエラーになったら【設定】マルチバイト文字セットが間違ってるかも
+    SetWindowSizeChangeEnableFlag(FALSE);//ウインドウサイズの変更の可否
+    SetMainWindowText("Ball In One");//この行でエラーになったら【設定】マルチバイト文字セットが間違ってるかも
     //↑ここまでの設定は↓下のDXライブラリ初期化より先にやらないとDxLib_Init()中は画面がフルスクリーンになって終わってからウィンドウサイズが変更になり見苦しい
 
     // ＤＸライブラリの初期化

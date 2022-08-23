@@ -1,6 +1,7 @@
 #include "Collision/Physics.h"
 #include "Collision/BoundingSphere.h"
 #include "Rendering/Field.h"
+#include "Mylib/Debug.h"
 
 //重力加速度
 const float Gravity{ -0.980665f };
@@ -27,11 +28,12 @@ void Physics::Update(float delta_time)
 	//重力
 	velocity_.y += Gravity * delta_time;
 
-	//速度系計算
-	//velocity_ *= 0.925f * delta_time;
-	//anguler_velocity_ *= 0.8f * delta_time;
 	//衝突計算
 	CollideField();
+	
+	//速度系計算
+	//velocity_ = velocity_*(1-(0.925f * delta_time));
+	//anguler_velocity_ = anguler_velocity_ *(1-( 0.8f * delta_time));
 
 	//トランスフォーム反映
 	transform_->translate(velocity_, GStransform::Space::World);
@@ -94,40 +96,23 @@ void Physics::CollideField()
 	MV1_COLL_RESULT_POLY_DIM polydim;
 	GSvector3 intersect;
 	if (world_->field()->collide(sphere_->transform(transform_->localToWorldMatrix()), &polydim, &intersect)) {
-		transform_->position(intersect);
-		//速度を保持
-		GSvector3 Vvec = velocity_;
-		//大きさ
-		float scale = velocity_.length();
-		scale = MAX(0.001f,scale * CLAMP(((bounciness_ + world_->field()->Bounciness) / 2), 0.0f, 1.0f));
-
+		//当たったポリゴンの法線をとりあえずまとめる
 		GSvector3 normV{ 0.0f,0.0f,0.0f };
 		for (int i = 0; i < polydim.HitNum; i++) {
 			normV.VECTOR_ = VAdd(normV.VECTOR_, polydim.Dim[i].Normal);
 			normV = normV.normalized();
 		}
 
-		Ray ray{ sphere_->center ,velocity_ };
+		//デバッグ
+		Debug::Log(normV);
+		Debug::Log(velocity_);
 
-		MV1_COLL_RESULT_POLY poly;
-		world_->field()->collide(ray, sphere_->radius, &poly);
-		if (poly.HitFlag == FALSE) {
-			ray.direction = -ray.direction;
-			world_->field()->collide(ray, sphere_->radius, &poly);
-		}
-
-		GSvector3 pos = poly.HitPosition + (velocity_.normalized() * sphere_->radius);
-		velocity_ = pos - poly.HitPosition;
-
-		ray.position = pos;
-		ray.direction = normV;
-
-		world_->field()->collide(ray, sphere_->radius + 0.5f, &poly);
-
-		GSvector3 distance = poly.HitPosition - velocity_;
-
-		velocity_ = (velocity_ + (2 * distance)).normalized() * scale;
-
+		//反射ベクトル(F=F+2aN)
+		velocity_ = velocity_-(2*GSvector3::dot(velocity_,normV)*normV);
+		//反発係数をもとに減衰
+		velocity_ *= MAX(0.001f,CLAMP(((bounciness_ + world_->field()->Bounciness) / 2), 0.0f, 1.0f));
+		
+		
 	}
 	DxLib::MV1CollResultPolyDimTerminate(polydim);
 }

@@ -22,7 +22,7 @@ void Ball::update(float delta_time)
 {
 	physics_.Update(delta_time);
 	if (InputManager::GetInputDown(InputType::KEY, KEY_INPUT_G)) {
-		physics_.AddForce(GSvector3{ 0.5f,-0.5f,0.0f });
+		physics_.AddForce(GSvector3{ -0.5f,-0.5f,0.0f });
 	}
 }
 
