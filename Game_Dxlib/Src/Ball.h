@@ -13,6 +13,14 @@ public:
 	virtual void react(Actor& other)override;
 	//•`‰æ
 	virtual void draw()const override;
+
+private:
+	int color;
+
+	float rote;
+	float speed;
+
+	GSvector3 Power;
 };
 
 
