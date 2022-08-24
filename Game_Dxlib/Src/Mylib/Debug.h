@@ -24,11 +24,22 @@ public:
 	static void Log(VECTOR v);
 
 
+	/// <summary>
+	/// Lineをデバッグ表示
+	/// </summary>
+	/// <param name="l">Line</param>
+	/// <param name="color">カラー</param>
 	static void DrawLine(Line l,unsigned int color = GetColor(255,255,255));
-	static void DrawRay(Ray ray,float length=1000.0f);
+	/// <summary>
+	/// Rayをデバッグ表示
+	/// </summary>
+	/// <param name="ray">Ray</param>
+	/// <param name="length">最大距離</param>
+	/// <param name="color">カラー</param>
+	static void DrawRay(Ray ray,float length=1000.0f,unsigned int color = GetColor(255, 255, 255));
 
 private:
-	void DrawArrow(VECTOR from, VECTOR to, unsigned int color);
+	static void DrawArrow(VECTOR from, VECTOR to, unsigned int color);
 };
 
 #endif // !DEBUG_H_
