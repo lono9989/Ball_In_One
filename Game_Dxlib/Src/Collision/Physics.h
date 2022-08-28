@@ -32,7 +32,7 @@ public:
 	void SetMass(float mass);*/
 private:
 	//フィールドとの当たり判定
-	void CollideField();
+	void CollideField(float delta_time);
 private:
 	IWorld* world_{ nullptr };
 	//トランスフォーム

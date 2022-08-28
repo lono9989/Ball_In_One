@@ -1,10 +1,13 @@
 #ifndef SCREEN_H_
 #define SCREEN_H_
+#include "DxLib.h"
 
-class Screen {
+static class Screen {
 public:
-	static const int Width{ 960 };
-	static const int Height{ 540 };
+	static void Start();
+public:
+	static int Width;
+	static int Height;
 };
 
 #endif // !SCREEN_H_

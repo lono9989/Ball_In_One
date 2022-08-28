@@ -165,6 +165,7 @@
     <ClCompile Include="Src\Mylib\DXlib_Input\MouseInput.cpp" />
     <ClCompile Include="Src\Mylib\DXlib_Input\OnlyKeyInput.cpp" />
     <ClCompile Include="Src\Rendering\Field.cpp" />
+    <ClCompile Include="Src\Rendering\Screen.cpp" />
     <ClCompile Include="Src\Scene\GamePlayScene.cpp" />
     <ClCompile Include="Src\Game.cpp" />
     <ClCompile Include="Src\Mylib\GSlib\GScollision.c" />
