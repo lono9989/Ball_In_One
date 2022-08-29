@@ -2,7 +2,7 @@
 
 #include "Mylib/Debug.h"
 
-Ball::Ball(IWorld* world, const GSvector3& position)
+Ball::Ball(IWorld* world, const GSvector3& position,float bounciness)
 {
 	// ƒ[ƒ‹ƒh‚ğİ’è
 	world_ = world;
@@ -15,7 +15,7 @@ Ball::Ball(IWorld* world, const GSvector3& position)
 	// À•W‚Ì‰Šú‰»
 	transform_.position(position);
 	physics_ = Physics{ world_,&collider_,&transform_ };
-	physics_.SetBounciness(0.7f);
+	physics_.SetBounciness(bounciness);
 
 	color = GetColor(255, 255, 255);
 

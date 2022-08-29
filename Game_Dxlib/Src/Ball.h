@@ -6,7 +6,7 @@
 class Ball :public Actor {
 public:
 	//コンストラクタ
-	Ball(IWorld* world = nullptr, const GSvector3& position = GSvector3{ 0.0f,0.0f,0.0f });
+	Ball(IWorld* world = nullptr, const GSvector3& position = GSvector3{ 0.0f,0.0f,0.0f },float bounciness=0.7f);
 	//更新
 	virtual void update(float delta_time)override;
 	//
