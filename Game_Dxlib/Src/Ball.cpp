@@ -50,9 +50,8 @@ void Ball::draw() const
 {
 	Debug::DrawCoordinateAxis(transform_);
 	DrawSphere3D(VECTOR{ transform_.position().x,transform_.position().y ,transform_.position().z }, 1, 16, color, color, TRUE);
-	collider().draw();
-	std::string str = std::to_string(transform_.position().x) + "," + std::to_string(transform_.position().y) + "," + std::to_string(transform_.position().z);
-	DrawString(80, 245, str.c_str(), GetColor(255, 255, 255));
+	//collider().draw();
+	Debug::DrawData(80, 245, transform_.position());
 
 
 	DrawCircle(110, 400, 105, GetColor(128, 128, 128), TRUE);

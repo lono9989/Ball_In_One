@@ -10,7 +10,7 @@ enum class InputType {
 /// <summary>
 /// ŠÇ——pƒNƒ‰ƒX
 /// </summary>
-static class InputManager {
+class InputManager {
 public: 
 	
 public:

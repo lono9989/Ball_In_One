@@ -12,7 +12,7 @@
 
 #include <cmath>
 
-static class GSeasing {
+class GSeasing {
 public:
 	static float gsEasingInBack(float t, float s = 1.70158f);
 	static float gsEasingInBounce(float t);

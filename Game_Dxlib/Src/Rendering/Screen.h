@@ -2,7 +2,7 @@
 #define SCREEN_H_
 #include "DxLib.h"
 
-static class Screen {
+class Screen {
 public:
 	static void Start();
 public:

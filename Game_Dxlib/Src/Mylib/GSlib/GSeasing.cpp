@@ -39,7 +39,7 @@ float GSeasing::gsEasingInElastic(float t, float s)
 		? 0.0f
 		: t >= 1.0f
 		? 1.0f
-		: -pow(2.0f, 10.0f * t - 10.0f) * sin((t * 10.0 - 10.75f) * s);
+		: -powf(2.0f, 10.0f * t - 10.0f) * sinf((t * 10.0f - 10.75f) * s);
 }
 
 float GSeasing::gsEasingInExpo(float t)

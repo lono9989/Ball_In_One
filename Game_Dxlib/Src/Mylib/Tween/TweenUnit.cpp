@@ -83,7 +83,7 @@ float TweenUnit::apply_ease(float value, EaseType ease_type, float overshoot) {
     case EaseType::EaseOutCubic:   return GSeasing::gsEasingOutCubic(value);
     case EaseType::EaseOutElastic: {
         if (value == 1.0f) return 1.0f;
-        return 1.0f - cos(value * 10 * overshoot) * pow(1 - value, 3);
+        return 1.0f - cosf(value * 10.0f * overshoot) * powf(1.0f - value, 3.0f);
     }
     case EaseType::EaseOutExpo:    return GSeasing::gsEasingOutExpo(value);
     case EaseType::EaseOutQuad:    return GSeasing::gsEasingOutQuad(value);

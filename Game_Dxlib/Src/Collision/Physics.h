@@ -12,7 +12,7 @@ class Physics {
 public:
 	Physics();
 	//球体用(他に必要な形が出てきたときはコンストラクタを別個オーバーロードしてください。)
-	Physics(IWorld* world, BoundingSphere* sphere, GStransform* transform, GSvector3 v = GSvector3{ 0.0f,0.0f,0.0f }, GSvector3 angv = GSvector3{ 0.0f,0.0f,0.0f });
+	Physics(IWorld* world, BoundingSphere* sphere, GStransform* transform, GSvector3 v = GSvector3{ 0.0f,0.0f,0.0f });
 	~Physics();
 
 	void Update(float delta_time);
@@ -33,6 +33,8 @@ public:
 private:
 	//フィールドとの当たり判定
 	void CollideField(float delta_time);
+	//回転速度の計算(velocityからの計算)
+	void CalcAnguler();
 private:
 	IWorld* world_{ nullptr };
 	//トランスフォーム
@@ -42,7 +44,7 @@ private:
 	//速度
 	GSvector3 velocity_;
 	//回転速度
-	GSvector3 anguler_velocity_;
+	GSvector3 anguler_velocity_{0.0f,0.0f,0.0f};
 
 	//反発係数
 	float bounciness_{0.0f};
@@ -50,8 +52,11 @@ private:
 	//まだ反映させてない
 	bool freezePosition[3]{ false,false,false };
 	bool freezeRotation[3]{ false,false,false };
+
 	////質量 
 	//float mass_{1.0f};
+
+	bool is_rolling{ false };
 };
 
 
