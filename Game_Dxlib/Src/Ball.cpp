@@ -14,13 +14,15 @@ Ball::Ball(IWorld* world, const GSvector3& position,float bounciness)
 	collider_ = BoundingSphere{ 1.0f,GSvector3{0.0f,0.0f,0.0f} };
 	// À•W‚Ì‰Šú‰»
 	transform_.position(position);
+	//•¨—‰‰ZƒNƒ‰ƒX‚Ì‰Šú‰»
 	physics_ = Physics{ world_,&collider_,&transform_ };
+	//”½”­ŒW”‚Ìİ’è
 	physics_.SetBounciness(bounciness);
 
 	color = GetColor(255, 255, 255);
 
-	speed = 1.f;
-	rote = 100.f;
+	speed = 1;
+	rote = 100;
 
 	Power = { 0,0,0 };
 }
@@ -34,7 +36,7 @@ void Ball::update(float delta_time)
 
 	rote -= speed;
 
-	if (rote < 20.f || rote >= 100.f)speed = -speed;
+	if (rote < 20 || rote >= 100)speed = -speed;
 
 	if (rote >= 70) { color = GetColor(0, 0, 0); Power = { gsRandf(-1,1),gsRandf(-1,1),gsRandf(-1,1) }; }
 	else if (rote >= 50) { color = GetColor(0, 0, 255); Power = { -0.2f,0.2f,0 }; }

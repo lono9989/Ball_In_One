@@ -42,27 +42,6 @@ void World::draw() const {
 	actors_.draw_gui();
 }
 
-void World::draw_shadowmap1() const
-{
-	light_->draw_shadowmap1();
-	field_->draw_shadow();
-	actors_.draw_shadowmap1();
-}
-
-void World::draw_shadowmap2() const
-{
-	light_->draw_shadowmap2();
-	field_->draw();
-	actors_.draw_shadowmap2();
-}
-
-void World::draw_shadowmap3() const
-{
-	light_->draw_shadowmap3();
-	field_->draw();
-	actors_.draw_shadowmap3();
-}
-
 //消去
 void World::clear() {
 	//アクターを消去

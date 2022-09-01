@@ -16,8 +16,6 @@ public:
 	virtual void update(float delta_time) = 0;
 	// 描画
 	virtual void draw()const = 0;
-	//シャドウマップの更新用
-	virtual void draw_shadow() = 0;
 	// 終了しているか？
 	virtual bool is_end()const = 0;
 	// 次のシーン名を返す

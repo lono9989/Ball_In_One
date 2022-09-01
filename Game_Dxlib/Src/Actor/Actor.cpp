@@ -14,13 +14,6 @@ void Actor::draw_transparent()const {};
 
 //GUIの描画
 void Actor::draw_gui()const {};
-//シャドウマップ描画用
-void Actor::draw_shadowmap1() const {}
-void Actor::draw_shadowmap1(int a) {};
-void Actor::draw_shadowmap2() const {}
-void Actor::draw_shadowmap2(int a) {};
-void Actor::draw_shadowmap3() const {};
-void Actor::draw_shadowmap3(int a){};
 
 //衝突リアクション
 void Actor::react(Actor&) {};

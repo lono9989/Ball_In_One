@@ -23,8 +23,6 @@ public:
 	virtual void draw()const override;
 	//半透明描画
 	virtual void draw_transparent()const override;
-	//シャドウマップ１への描画
-	virtual void draw_shadowmap1()const override;
 
 	// フィールドとの衝突処理
 	void Collide_Field();

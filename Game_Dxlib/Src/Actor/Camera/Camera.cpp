@@ -110,19 +110,6 @@ void Camera::update_Fps(float delta_time)
 {
 }
 
-void Camera::draw_shadowmap1(int a)
-{
-	pop_angle_ = VGet(GetCameraAngleVRotate(), GetCameraAngleHRotate(), GetCameraAngleTRotate());
-	SetupCamera_Ortho(20.0f);
-	SetCameraPositionAndAngle(transform_.position().VECTOR_, 45.0f, -60.0f, 20.0f);
-}
-
-void Camera::draw_shadowmap2(int a)
-{
-	SetCameraNearFar(0.1f, 99999.9f);
-	SetupCamera_Perspective(DEG_TO_RAD(Fov_));
-	SetCameraPositionAndAngle(transform_.position().VECTOR_, pop_angle_.x, pop_angle_.y, pop_angle_.z);
-}
 
 void Camera::ChangeMode(CamState state)
 {

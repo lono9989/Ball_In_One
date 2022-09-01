@@ -16,8 +16,6 @@ public:
 	virtual void update(float delta_time)override;
 	//描画
 	virtual void draw()const override;
-	//
-	virtual void draw_shadow()override;
 	//終了しているか？
 	virtual bool is_end()const override;
 	//次のシーンを返す

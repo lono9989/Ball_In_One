@@ -14,8 +14,6 @@ public:
 	virtual void update(float delta_time)override {}
 	// •`‰æ
 	virtual void draw()const override {}
-	//
-	virtual void draw_shadow()override {}
 	// I—¹‚µ‚Ä‚¢‚é‚©H
 	virtual bool is_end()const override {
 		return false;

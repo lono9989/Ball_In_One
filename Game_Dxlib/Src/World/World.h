@@ -18,10 +18,6 @@ public:
 	void update(float delta_time);
 	//描画
 	void draw()const;
-	//シャドウマップ描画用
-	void draw_shadowmap1()const;
-	void draw_shadowmap2()const;
-	void draw_shadowmap3()const;
 	//消去
 	void clear();
 	//カメラの追加

@@ -10,7 +10,7 @@
 class Field {
 public:
 	//コンストラクタ
-	Field(int model);
+	Field();
 	//デストラクタ
 	~Field();
 	//更新
@@ -36,13 +36,12 @@ public:
 	Field& operator=(const Field& other) = default;
 
 public:
-	const float Bounciness{ 0.5f };
+	const float Bounciness{ 0.8f };
 private:
 	//背景画像
 	GSuint bg_{ 0 };
 	//スクロール位置
 	float scroll_{ 0.0f };
-	int field_Model{ -1 };
 };
 
 #endif;

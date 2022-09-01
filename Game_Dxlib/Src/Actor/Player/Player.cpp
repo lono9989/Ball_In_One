@@ -89,11 +89,6 @@ void Player::draw_transparent() const
 	//mesh_.Trans_Draw();
 }
 
-void Player::draw_shadowmap1() const
-{
-	mesh_.Draw();
-}
-
 void Player::Collide_Field()
 {
 	// •Ç‚Æ‚ÌÕ“Ë”»’èi‹…‘Ì‚Æ‚Ì”»’èj

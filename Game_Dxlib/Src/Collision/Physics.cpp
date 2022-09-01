@@ -5,7 +5,8 @@
 
 //d—Í‰Á‘¬“x
 const float Gravity{ -0.980665f };
-
+//’n–Ê‚ð“]‚ª‚Á‚Ä‚¢‚é‚Æ‚«‚ÌŒ¸Š—¦(0‚ª­‚È‚¢¨1‚ª‘å‚«‚¢)
+const float Attenuation{ 0.2f };
 
 Physics::Physics()
 {
@@ -30,6 +31,15 @@ void Physics::Update(float delta_time)
 	CollideField(delta_time);
 	//d—Í
 	velocity_.y += Gravity * delta_time;
+	if (freezePosition[0]) {
+		velocity_.x = 0.0f;
+	}
+	if(freezePosition[1]){
+		velocity_.y = 0.0f;
+	}
+	if(freezePosition[2]){
+		velocity_.z = 0.0f;
+	}
 	//‰ñ“]‘¬“x‚ÌŒvŽZ
 	CalcAnguler();
 
@@ -37,9 +47,9 @@ void Physics::Update(float delta_time)
 	transform_->translate(velocity_, GStransform::Space::World);
 	transform_->rotate(anguler_velocity_,GStransform::Space::World);
 
-	//‘¬“xŒnŒvŽZ
+	//‘¬“xŒnŒvŽZ(‰ñ“]’†‚Å‚ ‚ê‚Î‘¬“x‚ð­‚µ‚¸‚ÂŽã‚ß‚é)
 	if (is_rolling) {
-	velocity_ *= (1-(0.2f * delta_time));
+	velocity_ *= (1-(Attenuation * delta_time));
 	}
 }
 
@@ -78,6 +88,13 @@ void Physics::SetBounciness(float bounce)
 	bounciness_ = bounce;
 }
 
+void Physics::SetFreezePosition(bool x, bool y, bool z)
+{
+	freezePosition[0] = x;
+	freezePosition[1] = y;
+	freezePosition[2] = z;
+}
+
 //float Physics::GetMass()
 //{
 //	return mass_;
@@ -93,6 +110,7 @@ void Physics::CollideField(float delta_time)
 	MV1_COLL_RESULT_POLY_DIM polydim;
 	//ƒtƒB[ƒ‹ƒh‚Æ‚ÌÕ“Ë”»’è
 	if (world_->field()->collide(sphere_->transform(transform_->localToWorldMatrix()), &polydim)) {
+		//æ‚Éfalse”»’è‚ðæ‚Á‚¯‚Ä‚¨‚­
 		is_rolling = false;
 		//“–‚½‚Á‚½ƒ|ƒŠƒSƒ“‚Ì–@ü‚ð‚Æ‚è‚ ‚¦‚¸‚Ü‚Æ‚ß‚é
 		GSvector3 normV{ 0.0f,0.0f,0.0f };
@@ -109,11 +127,13 @@ void Physics::CollideField(float delta_time)
 
 		//”½”­ŒW”‚ð‚à‚Æ‚ÉŒ¸Š
 		velocity_.y *= MAX(0.001f, CLAMP(((bounciness_ + world_->field()->Bounciness) / 2), 0.0f, 1.0f));
+		//‚à‚µy‘¬“x‚ª’x‚¢‚Æ‚«‚Í“]‚ª‚·
 		if (ABS(velocity_.y) > 0.1f) {
 			velocity_.x *= MAX(0.001f, CLAMP(((bounciness_ + world_->field()->Bounciness) / 2), 0.0f, 1.0f));
 			velocity_.z *= MAX(0.001f, CLAMP(((bounciness_ + world_->field()->Bounciness) / 2), 0.0f, 1.0f));
 		}
 		else {
+			//“]‚ª‚·
 			is_rolling = true;
 		}
 		//‰Ÿ‚µ–ß‚µ
@@ -121,13 +141,17 @@ void Physics::CollideField(float delta_time)
 		MV1_COLL_RESULT_POLY poly;
 		if (world_->field()->collide(l, &poly))
 		{
+			//Œ³‚ÌˆÊ’u
 			GSvector3 pos = transform_->position();
+			//•ÏXŒã‚ÌˆÊ’u
 			GSvector3 position{ poly.HitPosition };
+			//“–‚½‚Á‚½êŠ‚©‚ç–@ü•ûŒü‚É”¼Œa•ª—£‚·
 			position += normV * (sphere_->radius);
+			//”½‰f
 			transform_->position(position);
-			//
+			//y‘¬“x‚ª’x‚­–³‚¯‚ê‚Î–„‚Ü‚Á‚Ä‚¢‚é•ª•Ç‚©‚ç—£‚·
 			if (ABS(velocity_.y) > 0.01f) {
-				transform_->translate(GSvector3{ 0.0f,sphere_->radius - ABS(pos.y - poly.HitPosition.y),0.0f },
+				transform_->translate(normV*(sphere_->radius - (pos - poly.HitPosition).length()),
 									  GStransform::Space::World);
 			}
 		}
@@ -138,7 +162,10 @@ void Physics::CollideField(float delta_time)
 
 void Physics::CalcAnguler()
 {
+	//‘¬“x‚©‚ç‰ñ“]‘¬“x‚ð‹‚ß‚é
+	//(‰~Žü•ª‚Ì‘¬“x‚ÅŒÊ‚Ì’·‚³‚ÌŠ„‡‚ð‹‚ß360“x‚ð‚©‚¯ƒIƒCƒ‰[–@‚ÅŠp“x‚ðŽZo)
 	float x = velocity_.z / (2.0f * GS_PI * sphere_->radius) * 360.0f;
 	float z = velocity_.x / (2.0f * GS_PI * sphere_->radius) * 360.0f;
+	//”½‰f
 	anguler_velocity_ = GSvector3{ x,0.0f,-z };
 }

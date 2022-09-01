@@ -23,9 +23,6 @@ public:
 
     void update_Fps(float delta_time);
 
-    virtual void draw_shadowmap1(int a)override;
-    virtual void draw_shadowmap2(int a)override;
-
     void ChangeMode(CamState state);
 
 private:

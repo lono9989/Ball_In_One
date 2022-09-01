@@ -28,6 +28,7 @@ public:
 	void SetAngulerVelocity(GSvector3 v);
 	float GetBounciness();
 	void SetBounciness(float bounce);
+	void SetFreezePosition(bool x = false, bool y = false , bool z=false);
 	/*float GetMass();
 	void SetMass(float mass);*/
 private:
@@ -41,6 +42,8 @@ private:
 	GStransform* transform_{nullptr};
 	//コライダーのポインター (なんだったらまとめれるものを作りたい)
 	BoundingSphere* sphere_{ nullptr };
+	
+	//ワールド座標系ベクトルです
 	//速度
 	GSvector3 velocity_;
 	//回転速度
@@ -49,9 +52,11 @@ private:
 	//反発係数
 	float bounciness_{0.0f};
 
-	//まだ反映させてない
+	//位置の固定化
 	bool freezePosition[3]{ false,false,false };
-	bool freezeRotation[3]{ false,false,false };
+
+	//回転はどうやって反映させよう
+	//bool freezeRotation[3]{ false,false,false };
 
 	////質量 
 	//float mass_{1.0f};

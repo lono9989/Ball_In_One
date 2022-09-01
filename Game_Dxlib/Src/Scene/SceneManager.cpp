@@ -37,7 +37,6 @@ void SceneManager::update(float delta_time) {
 			}
 		}
 	}
-	current_scene_->draw_shadow();
 }
 
 // •`‰æ

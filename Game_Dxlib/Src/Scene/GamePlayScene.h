@@ -15,8 +15,6 @@ public:
 	virtual void update(float delta_time)override;
 	//描画
 	virtual void draw()const override;
-	//
-	virtual void draw_shadow()override;
 	//終了しているか？
 	virtual bool is_end()const override;
 	//次のシーンを返す
@@ -29,7 +27,6 @@ private:
 	World world_;
 	//終了フラグ
 	bool is_end_{ false };
-	int Shadow_Handle{ -1 };
 };
 
 #endif // !GAME_PLAY_SCENE_H_

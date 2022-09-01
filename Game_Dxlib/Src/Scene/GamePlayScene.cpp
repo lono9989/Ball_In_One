@@ -28,14 +28,11 @@ void GamePlayScene::start() {
 	//マウスカーソルを非表示
 	SetMouseDispFlag(FALSE);
 
-	//シャドウマップを作成
-	//Shadow_Handle = MakeShadowMap(4096, 4096);
-
 	//スカイドームはZバッファを使わない
 	MV1SetUseZBuffer(Assets::Mesh_Skydome, FALSE);
 	MV1SetScale(Assets::Mesh_Field, VGet(0.1f, 0.1f, 0.1f));
 	// フィールドクラスの追加
-	world_.add_field(new Field{ Assets::Mesh_Field});
+	world_.add_field(new Field{});
 	//カメラクラスの追加
 	world_.add_camera(new Camera{ &world_,GSvector3{0.0f,0.0f,0.0f} ,GSvector3{0.0f, 1.93f, 0.0f} });
 	//ライトクラスの追加
@@ -43,7 +40,7 @@ void GamePlayScene::start() {
 	//プレイヤの追加
 	world_.add_actor(new Player{ &world_,Assets::Mesh_Player,GSvector3{0.0f,0.0f,0.0f} });
 
-	world_.add_actor(new Ball(&world_, GSvector3{ 0.0f,10.0f,0.0f }));
+	world_.add_actor(new Ball(&world_, GSvector3{ 0.0f,10.0f,0.0f },0.8f));
 
 	//終了フラグを初期化
 	is_end_ = false;
@@ -79,27 +76,7 @@ void GamePlayScene::draw()const {
 
 	DrawString(80, 215, "プレイシーン（仮）", GetColor(255, 255, 255));
 	
-	//シャドウマップテスト描画用
-	//TestDrawShadowMap(Shadow_Handle, 0, 0, 160, 160);
-}
-
-void GamePlayScene::draw_shadow() {
-	/*
-	//カメラのセットアップ
-	world_.camera()->draw_shadowmap1(1);
-	//シャドウマップのライトを定義
-	SetShadowMapLightDirection(Shadow_Handle, VGet(GetCameraAngleVRotate(), GetCameraAngleHRotate(), GetCameraAngleTRotate()));
-	// シャドウマップに描画する範囲を設定
-	SetShadowMapDrawArea(Shadow_Handle, VAdd(world_.camera()->transform().position().VECTOR_,VGet(-100.0f, -50.0f, -100.0f)),VAdd(world_.camera()->transform().position().VECTOR_, VGet(100.0f, 100.0f, 100.0f)));
-	//シャドウマップスクリーンに描画はじめ
-	ShadowMap_DrawSetup(Shadow_Handle);
-	//シャドウマップ用描画
-	world_.draw_shadowmap1();
-	//シャドウマップスクリーンに描画終わり
-	ShadowMap_DrawEnd();
-	//カメラの後始末
-	world_.camera()->draw_shadowmap2(2);
-	*/
+	
 }
 
 //終了しているか？
@@ -120,7 +97,6 @@ void GamePlayScene::end() {
 	MV1DeleteModel(Assets::Mesh_Skydome);
 	MV1DeleteModel(Assets::Mesh_Field);
 	MV1DeleteModel(Assets::Mesh_Player);
-	DeleteShadowMap(Shadow_Handle);
 	DeleteShader(Assets::VShader_MMD);
 	DeleteShader(Assets::PShader_MMD);
 	DeleteShader(Assets::VShader_Normal);

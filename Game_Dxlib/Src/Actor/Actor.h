@@ -26,13 +26,6 @@ public:
 	virtual void draw_transparent()const;
 	//GUIの描画
 	virtual void draw_gui()const;
-	//シャドウマップ描画用
-	virtual void draw_shadowmap1()const;
-	virtual void draw_shadowmap1(int a);
-	virtual void draw_shadowmap2()const;
-	virtual void draw_shadowmap2(int a);
-	virtual void draw_shadowmap3()const;
-	virtual void draw_shadowmap3(int a);
 
 
 	//衝突リアクション

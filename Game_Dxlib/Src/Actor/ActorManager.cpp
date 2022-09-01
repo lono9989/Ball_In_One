@@ -32,27 +32,6 @@ void ActorManager::draw() const {
     }
 }
 
-void ActorManager::draw_shadowmap1() const
-{
-    for (auto actor : actors_) {
-        actor->draw_shadowmap1();
-    }
-}
-
-void ActorManager::draw_shadowmap2() const
-{
-    for (auto actor : actors_) {
-        actor->draw_shadowmap2();
-    }
-}
-
-void ActorManager::draw_shadowmap3() const
-{
-    for (auto actor : actors_) {
-        actor->draw_shadowmap3();
-    }
-}
-
 // 半透明アクターの描画
 void ActorManager::draw_transparent() const {
     for (auto actor : actors_) {

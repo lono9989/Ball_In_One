@@ -22,10 +22,6 @@ public:
     void late_update(float delta_time);
     // アクターの描画
     void draw() const;
-    //シャドウマップ描画用
-    void draw_shadowmap1()const;
-    void draw_shadowmap2()const;
-    void draw_shadowmap3()const;
 
     // 半透明アクターの描画
     void draw_transparent() const;

@@ -29,10 +29,6 @@ void TitleScene::draw()const {
 	//gsFontParameter(0, 16, "ＭＳ ゴシック");
 }
 
-void TitleScene::draw_shadow()
-{
-}
-
 //終了しているか？
 bool TitleScene::is_end()const {
 	return is_end_; //シーン終了

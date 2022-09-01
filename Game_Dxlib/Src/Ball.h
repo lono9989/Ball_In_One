@@ -17,8 +17,8 @@ public:
 private:
 	int color;
 
-	float rote;
-	float speed;
+	int rote;
+	int speed;
 
 	GSvector3 Power;
 };
