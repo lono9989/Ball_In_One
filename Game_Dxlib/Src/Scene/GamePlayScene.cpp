@@ -13,7 +13,7 @@ void GamePlayScene::load()
 {
 
 	//Assets::Mesh_Skydome = MV1LoadModel("");
-	Assets::Mesh_Field = MV1LoadModel("Assets/Model/Field/untitled1.mv1");
+	Assets::Mesh_Field = MV1LoadModel("Assets/Model/Field/room100.mv1");
 	//Assets::Mesh_Player = MV1LoadModel("");
 	//Assets::VShader_MMD = LoadVertexShader("");
 	//Assets::PShader_MMD = LoadPixelShader("");
@@ -38,9 +38,9 @@ void GamePlayScene::start() {
 	//ライトクラスの追加
 	world_.add_light(new Light{ &world_ });
 	//プレイヤの追加
-	world_.add_actor(new Player{ &world_,Assets::Mesh_Player,GSvector3{0.0f,0.0f,0.0f} });
+	world_.add_actor(new Player{ &world_,Assets::Mesh_Player,GSvector3{2.0f,0.0f,20.0f} });
 
-	world_.add_actor(new Ball(&world_, GSvector3{ 0.0f,10.0f,0.0f },0.8f));
+	world_.add_actor(new Ball(&world_, GSvector3{ 2.0f,10.0f,20.0f },0.8f));
 
 	//終了フラグを初期化
 	is_end_ = false;
