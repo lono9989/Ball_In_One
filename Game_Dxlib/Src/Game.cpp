@@ -24,6 +24,9 @@ void Game::Init()
 
 void Game::Update(float delta_time)
 {
+	if (CheckHitKey(KEY_INPUT_ESCAPE) ==TRUE) {
+		is_end = true;
+	}
 	// 更新処理
 	InputManager::Update();
 	//シーンの更新
@@ -36,4 +39,9 @@ void Game::Draw()
 
 	//シーンの描画
 	scene_manager_.draw();
+}
+
+bool Game::IsEnd()
+{
+	return is_end;
 }

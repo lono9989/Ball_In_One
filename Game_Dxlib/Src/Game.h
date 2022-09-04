@@ -20,8 +20,10 @@ public:
 	void Init(); // Init処理(定義だけ)
 	void Update(float delta_time); // 更新処理(定義だけ)
 	void Draw();// 描画処理(定義だけ)
+	bool IsEnd();//終了するかどうか
 
 private:
+	bool is_end{ false };
 	//シーンマネージャー
 	SceneManager scene_manager_;
 
