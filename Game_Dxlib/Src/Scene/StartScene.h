@@ -1,11 +1,10 @@
-#ifndef GAME_PLAY_SCENE_H_
-#define GAME_PLAY_SCENE_H_
+#ifndef START_SCENE_H_
+#define START_SCENE_H_
 
 #include "IScene.h"
 #include "World/World.h"
-
 //ゲームプレイシーン
-class GamePlayScene :public IScene {
+class StartScene :public IScene {
 public:
 	//読み込み
 	virtual void load()override;
@@ -23,12 +22,10 @@ public:
 	virtual void end()override;
 
 private:
-	//ワールドクラス
-	World world_;
+	float timer_;
 	//終了フラグ
 	bool is_end_{ false };
-
-	bool is_backGround_{false};
 };
 
-#endif // !GAME_PLAY_SCENE_H_
+
+#endif	// !START_SCENE_H_

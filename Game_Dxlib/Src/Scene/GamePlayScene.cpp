@@ -59,6 +59,14 @@ void GamePlayScene::update(float delta_time)
 	world_.update(delta_time);
 	//スカイドームの座標をカメラ位置に
 	MV1SetPosition(Assets::Mesh_Skydome, world_.camera()->transform().position().VECTOR_);
+	
+	if (GetMainWindowHandle() != GetForegroundWindow()) {
+		SetMouseDispFlag(TRUE);
+		is_backGround_ = true;
+	}
+	else if(is_backGround_) {
+		SetMouseDispFlag(FALSE);
+	}
 }
 
 

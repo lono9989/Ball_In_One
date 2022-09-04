@@ -33,6 +33,10 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	SetWindowSizeChangeEnableFlag(FALSE);//ウインドウサイズの変更の可否
 	SetMainWindowText("Ball In One");//この行でエラーになったら【設定】マルチバイト文字セットが間違ってるかも
 
+	SetAeroDisableFlag(TRUE);//AeroのOFF
+
+	SetWindowPos(GetMainWindowHandle(), HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE);//最前面に表示
+
 	SetMouseDispFlag(TRUE);// ここをFALSEにするとマウスカーソル非表示
 	//↑ここまでの設定は↓下のDXライブラリ初期化より先にやらないとDxLib_Init()中は画面がフルスクリーンになって終わってからウィンドウサイズが変更になり見苦しい
 

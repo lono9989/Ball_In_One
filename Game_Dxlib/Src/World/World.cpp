@@ -50,8 +50,8 @@ void World::clear() {
 	delete camera_;
 	camera_ = nullptr;
 	//ライトを消去
-	//delete light_;
-	//light_ = nullptr;
+	delete light_;
+	light_ = nullptr;
 	//フィールドを消去
 	delete field_;
 	field_ = nullptr;

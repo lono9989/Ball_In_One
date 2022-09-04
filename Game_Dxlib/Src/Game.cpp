@@ -1,4 +1,5 @@
 #include "Game.h"
+#include "Scene/StartScene.h"
 #include "Scene/TitleScene.h"
 #include "Scene/GamePlayScene.h"
 
@@ -13,13 +14,14 @@ void Game::Init()
 {
 	// Init処理
 	InputManager::Init();
+	//スタートシーンの追加
+	scene_manager_.add("StartScene", new StartScene());
 	//タイトルシーンの追加
 	scene_manager_.add("TitleScene", new TitleScene());
 	//ゲームプレイシーンの追加
 	scene_manager_.add("GamePlayScene", new GamePlayScene());
-	scene_manager_.load("TitleScene");
 	//タイトルシーンから開始
-	scene_manager_.change("TitleScene");
+	scene_manager_.change("StartScene");
 }
 
 void Game::Update(float delta_time)
