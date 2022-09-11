@@ -34,10 +34,10 @@ void Physics::Update(float delta_time)
 	if (freezePosition[0]) {
 		velocity_.x = 0.0f;
 	}
-	if(freezePosition[1]){
+	if (freezePosition[1]) {
 		velocity_.y = 0.0f;
 	}
-	if(freezePosition[2]){
+	if (freezePosition[2]) {
 		velocity_.z = 0.0f;
 	}
 	//回転速度の計算
@@ -45,11 +45,11 @@ void Physics::Update(float delta_time)
 
 	//トランスフォーム反映
 	transform_->translate(velocity_, GStransform::Space::World);
-	transform_->rotate(anguler_velocity_,GStransform::Space::World);
+	transform_->rotate(anguler_velocity_, GStransform::Space::World);
 
 	//速度系計算(回転中であれば速度を少しずつ弱める)
 	if (is_rolling) {
-	velocity_ *= (1-(Attenuation * delta_time));
+		velocity_ *= (1 - (Attenuation * delta_time));
 	}
 }
 
@@ -115,10 +115,16 @@ void Physics::CollideField(float delta_time)
 		//当たったポリゴンの法線をとりあえずまとめる
 		GSvector3 normV{ 0.0f,0.0f,0.0f };
 		for (int i = 0; i < polydim.HitNum; i++) {
-			if (GSvector3::angle(velocity_, polydim.Dim[i].Normal) < 10.0f) {
-				return;
+			float f = GSvector3::angle(velocity_, polydim.Dim[i].Normal);
+			if (f < 90.0f) {
+				normV -= polydim.Dim[i].Normal;
 			}
-			normV += polydim.Dim[i].Normal;
+			else if (f ==90.0f) {
+				break;
+			}
+			else {
+				normV += polydim.Dim[i].Normal;
+			}
 			normV = normV.normalized();
 		}
 
@@ -151,8 +157,8 @@ void Physics::CollideField(float delta_time)
 			transform_->position(position);
 			//y速度が遅く無ければ埋まっている分壁から離す
 			if (ABS(velocity_.y) > 0.01f) {
-				transform_->translate(normV*(sphere_->radius - (pos - poly.HitPosition).length()),
-									  GStransform::Space::World);
+				transform_->translate(normV * (sphere_->radius - (pos - poly.HitPosition).length()),
+					GStransform::Space::World);
 			}
 		}
 	}
