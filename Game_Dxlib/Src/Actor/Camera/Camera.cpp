@@ -6,6 +6,8 @@
 #include "Collision/Line.h"
 #include "Rendering/Field.h"
 #include "Mylib/Dxlib_Input/MouseInput.h"
+#include "Mylib/Dxlib_Input/MouseInput.h"
+#include "Ball.h"
 
 #include <string>
 
@@ -46,7 +48,7 @@ void Camera::update(float delta_time)
 	case Camera::Ortho:
 		break;
 	case Camera::TPS:
-		update_Tps(delta_time);
+		update_Tps(delta_time, Ball::getCamera());
 		break;
 	case Camera::FPS:
 		update_Fps(delta_time);
@@ -68,26 +70,30 @@ void Camera::draw() const
 	SetCameraPositionAndTargetAndUpVec(eye.VECTOR_, at.VECTOR_, up.VECTOR_);
 }
 
-void Camera::update_Tps(float delta_time)
+void Camera::update_Tps(float delta_time,bool ball)
 {
+	Actor* player;
 	// プレーヤーを検索
-	Actor* player = world_->find_actor("Player");
+	if (!ball)player = world_->find_actor("Player");
+	else player = world_->find_actor("Ball");
+
 	if (player == nullptr) return;
 	VECTOR vec = MouseInput::GetMouseDif_and_SetPos(Screen::Width / 2, Screen::Height / 2);
 
-	// y軸まわりにカメラを回転させる
-	yaw_ += vec.x * RotateSpeed * delta_time;
-	// x軸まわりにカメラを回転させる
-	pitch_ -= vec.y * RotateSpeed * delta_time;
-	// x軸まわりの回転角度の制限をする
-	pitch_ = CLAMP(pitch_, -75.0f, 85.0f);
+	if (!ball) {
+		// y軸まわりにカメラを回転させる
+		yaw_ += vec.x * RotateSpeed * delta_time;
+		// x軸まわりにカメラを回転させる
+		pitch_ -= vec.y * RotateSpeed * delta_time;
+		// x軸まわりの回転角度の制限をする
+		pitch_ = CLAMP(pitch_, -75.0f, 85.0f);
 
-	PlayerOffset.z -= ZoomSpeed * GetMouseWheelRotVolF();
-	PlayerOffset.z = CLAMP(PlayerOffset.z, 5.0f, 40.0f);
-	if (PlayerOffset.z < 10.0f) {
-		pitch_ = CLAMP(pitch_, -75.0f, 85.0f - (10.0f - PlayerOffset.z) * 5.0f);
+		PlayerOffset.z -= ZoomSpeed * GetMouseWheelRotVolF();
+		PlayerOffset.z = CLAMP(PlayerOffset.z, 5.0f, 40.0f);
+		if (PlayerOffset.z < 10.0f) {
+			pitch_ = CLAMP(pitch_, -75.0f, 85.0f - (10.0f - PlayerOffset.z) * 5.0f);
+		}
 	}
-
 	// 注視点の座標を求める
 	GSvector3 at = player->transform().position() + ReferencePointOffset;
 	// カメラの座標を求める
