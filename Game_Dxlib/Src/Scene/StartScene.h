@@ -22,7 +22,7 @@ public:
 	virtual void end()override;
 
 private:
-	float timer_;
+	float timer_{0.0f};
 	//I—¹ƒtƒ‰ƒO
 	bool is_end_{ false };
 };
