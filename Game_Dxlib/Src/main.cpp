@@ -25,7 +25,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	Screen::Start();
 	SetWindowStyleMode(2);
 #endif
-
+	SetDrawMode(DX_DRAWMODE_BILINEAR);
 	SetGraphMode(Screen::Width, Screen::Height, 32); // 画面サイズ960×540のカラービット数32ビットで起動
 	SetWindowSize(Screen::Width, Screen::Height);// ウィンドウサイズ960×540(こことSetGraphModeのサイズが異なると画像がゆがむ)
 	SetAlwaysRunFlag(TRUE);//アクティブ状態でなくとも処理を実行するかどうか

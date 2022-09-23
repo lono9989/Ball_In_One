@@ -4,6 +4,7 @@
 #define TITLE_SCENE_H_
 
 #include"IScene.h"
+#include "DxLib.h"
 
 //タイトルシーン
 class TitleScene :public IScene {
@@ -26,6 +27,8 @@ public:
 private:
 	//終了フラグ
 	bool is_end_{ false };
+	float timer_{ 0.0f };
+	VECTOR start_position_{0.0f,0.0f,0.0f};
 };
 
 #endif // !TITLE_SCENE_H_

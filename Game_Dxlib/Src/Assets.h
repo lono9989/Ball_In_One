@@ -15,6 +15,12 @@ public :
 	static int PShader_Normal;
 
 	static int Texture_GradPlayer;
+	static int Texture_TitleBG;
+	static int Texture_TitleLogo;
+	static int Texture_TitleStart;
+
+	static int Sound_TitleBGM;
+	static int Sound_TitleStart;
 };
 
 #endif
