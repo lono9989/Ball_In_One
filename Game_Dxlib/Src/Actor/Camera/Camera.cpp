@@ -2,7 +2,6 @@
 #include "DxLib.h"
 #include "Rendering/Screen.h"
 #include "World/IWorld.h"
-#include "Mylib/Mylib.h"
 #include "Collision/Line.h"
 #include "Rendering/Field.h"
 #include "Mylib/Dxlib_Input/MouseInput.h"
@@ -19,6 +18,7 @@ const float RotateSpeed{ 50.0f };
 const float ZoomSpeed{ 2.0f };
 
 Camera* Camera::camera{ nullptr };
+GSvector3 Camera::forward_{ 0,0,0 };
 
 Camera::Camera(IWorld* world, const GSvector3& position, const GSvector3& at)
 {
@@ -70,7 +70,7 @@ void Camera::draw() const
 	SetCameraPositionAndTargetAndUpVec(eye.VECTOR_, at.VECTOR_, up.VECTOR_);
 }
 
-void Camera::update_Tps(float delta_time,bool ball)
+void Camera::update_Tps(float delta_time, bool ball)
 {
 	Actor* player;
 	// プレーヤーを検索
@@ -106,6 +106,8 @@ void Camera::update_Tps(float delta_time,bool ball)
 		position.VECTOR_ = VAdd(res.HitPosition, VScale(VNorm(VSub(res.HitPosition, position.VECTOR_)), 0.8f));
 	}
 
+	forward_ = transform_.forward();
+
 	// 座標の設定
 	transform_.position(position);
 	// 注視点の方向を見る
@@ -120,4 +122,8 @@ void Camera::update_Fps(float delta_time)
 void Camera::ChangeMode(CamState state)
 {
 	state_ = state;
+}
+
+GSvector3 Camera::getForward() {
+	return forward_;
 }

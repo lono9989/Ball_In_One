@@ -2,6 +2,7 @@
 
 #include "Mylib/Debug.h"
 #include "Rendering/Screen.h"
+#include "Actor/Camera/Camera.h"
 
 bool Ball::camera = false;
 
@@ -75,9 +76,9 @@ void Ball::Start(float delta_time) {
 	if (rote < 20 || rote >= 100)speed = -speed;
 
 	if (rote >= 70) { color = GetColor(0, 0, 0); Power = { gsRandf(-1,1),gsRandf(-1,1),gsRandf(-1,1) }; }
-	else if (rote >= 50) { color = GetColor(0, 0, 255); Power = { -0.2f,0.2f,0 }; }
-	else if (rote >= 30) { color = GetColor(0, 255, 0); Power = { -0.5f,0.5f,0 }; }
-	else { color = GetColor(255, 0, 0); Power = { -1,1,0 }; }
+	else if (rote >= 50) { color = GetColor(0, 0, 255); Power = Camera::getForward() * 0.5f; }
+	else if (rote >= 30) { color = GetColor(0, 255, 0); Power = Camera::getForward(); }
+	else { color = GetColor(255, 0, 0); Power = /*{ -1,1,0 };*/	Camera::getForward() * 1.5f; }
 
 	if (InputManager::GetInputDown(InputType::MOUSE, MOUSEEVENTF_LEFTDOWN)) {
 		camera = true;

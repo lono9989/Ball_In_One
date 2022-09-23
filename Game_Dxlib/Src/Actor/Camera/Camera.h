@@ -3,6 +3,8 @@
 
 #include "Actor/Actor.h"
 
+#include "Mylib/Mylib.h"
+
 // 三人称カメラクラス
 class Camera : public Actor {
 public :
@@ -25,6 +27,8 @@ public:
 
     void ChangeMode(CamState state);
 
+    static GSvector3 getForward();
+
 private:
     GSvector3 rotate_{0.0f,0.0f,0.0f};
     // y軸周りの回転角度
@@ -39,6 +43,7 @@ private:
     float Fov_{60.0f};
     VECTOR pop_angle_{0.0f,0.0f,0.0f};
     static Camera* camera;
+    static GSvector3 forward_;
 };
 
 #endif
