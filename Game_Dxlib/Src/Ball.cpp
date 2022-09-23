@@ -78,7 +78,7 @@ void Ball::Start(float delta_time) {
 	if (rote >= 70) { color = GetColor(0, 0, 0); Power = { gsRandf(-1,1),gsRandf(-1,1),gsRandf(-1,1) }; }
 	else if (rote >= 50) { color = GetColor(0, 0, 255); Power = Camera::getForward() * 0.5f; }
 	else if (rote >= 30) { color = GetColor(0, 255, 0); Power = Camera::getForward(); }
-	else { color = GetColor(255, 0, 0); Power = /*{ -1,1,0 };*/	Camera::getForward() * 1.5f; }
+	else { color = GetColor(255, 0, 0); Power = Camera::getForward() * 1.5f; }
 
 	if (InputManager::GetInputDown(InputType::MOUSE, MOUSEEVENTF_LEFTDOWN)) {
 		camera = true;
@@ -89,6 +89,11 @@ void Ball::Start(float delta_time) {
 void Ball::Shot(float delta_time) {
 	int mx, my;
 	GetMousePoint(&mx, &my);
+
+	if (InputManager::GetInputDown(InputType::MOUSE, MOUSEEVENTF_LEFTDOWN)) {
+		camera = false;
+		state_ = State::Start;
+	}
 
 	if (my < (Screen::Height / 2) - 100 && count == 0) {
 		physics_.AddForce(Power);
