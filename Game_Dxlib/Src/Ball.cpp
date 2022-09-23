@@ -1,6 +1,7 @@
 #include "Ball.h"
 
 #include "Mylib/Debug.h"
+#include "Rendering/Screen.h"
 
 bool Ball::camera = false;
 
@@ -88,11 +89,12 @@ void Ball::Shot(float delta_time) {
 	int mx, my;
 	GetMousePoint(&mx, &my);
 
-	if (my < 0 && count == 0) {
+	if (my < (Screen::Height / 2) - 100 && count == 0) {
 		physics_.AddForce(Power);
 		count++;
 		state_ = State::Move;
 	}
+
 }
 
 void Ball::Move(float delta_time) {
