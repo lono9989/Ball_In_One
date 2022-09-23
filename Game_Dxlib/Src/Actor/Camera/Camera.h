@@ -19,7 +19,7 @@ public:
     // •`‰æ
     virtual void draw() const override;
 
-    void update_Tps(float delta_time);
+    void update_Tps(float delta_time, bool ball);
 
     void update_Fps(float delta_time);
 
@@ -39,7 +39,6 @@ private:
     float Fov_{60.0f};
     VECTOR pop_angle_{0.0f,0.0f,0.0f};
     static Camera* camera;
-
 };
 
 #endif

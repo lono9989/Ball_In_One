@@ -2,7 +2,9 @@
 
 #include "Mylib/Debug.h"
 
-Ball::Ball(IWorld* world, const GSvector3& position,float bounciness)
+bool Ball::camera = false;
+
+Ball::Ball(IWorld* world, const GSvector3& position, float bounciness)
 {
 	// ÉèÅ[ÉãÉhÇê›íË
 	world_ = world;
@@ -23,25 +25,27 @@ Ball::Ball(IWorld* world, const GSvector3& position,float bounciness)
 
 	speed = 1;
 	rote = 100;
+	count = 0;
 
 	Power = { 0,0,0 };
 }
 
 void Ball::update(float delta_time)
 {
-	physics_.Update(delta_time);
-	if (InputManager::GetInputDown(InputType::KEY, KEY_INPUT_G)) {
-		physics_.AddForce(Power);
+	switch (state_)
+	{
+	case Ball::State::Start:
+		Start(delta_time);
+		break;
+	case Ball::State::Shot:
+		Shot(delta_time);
+		break;
+	case Ball::State::Move:
+		Move(delta_time);
+		break;
+	default:
+		break;
 	}
-
-	rote -= speed;
-
-	if (rote < 20 || rote >= 100)speed = -speed;
-
-	if (rote >= 70) { color = GetColor(0, 0, 0); Power = { gsRandf(-1,1),gsRandf(-1,1),gsRandf(-1,1) }; }
-	else if (rote >= 50) { color = GetColor(0, 0, 255); Power = { -0.2f,0.2f,0 }; }
-	else if (rote >= 30) { color = GetColor(0, 255, 0); Power = { -0.5f,0.5f,0 }; }
-	else { color = GetColor(255, 0, 0); Power = { -1,1,0 }; }
 }
 
 void Ball::react(Actor& other)
@@ -55,11 +59,54 @@ void Ball::draw() const
 	//collider().draw();
 	Debug::DrawData(80, 245, transform_.position());
 
-
 	DrawCircle(110, 400, 105, GetColor(128, 128, 128), TRUE);
 	DrawCircle(110, 400, 100, GetColor(0, 0, 0), TRUE);
 	DrawCircle(110, 400, 70, GetColor(0, 0, 255), TRUE);
 	DrawCircle(110, 400, 50, GetColor(0, 255, 0), TRUE);
 	DrawCircle(110, 400, 30, GetColor(255, 0, 0), TRUE);
 	DrawCircle(110, 400, rote, GetColor(255, 255, 255), FALSE);
+}
+
+void Ball::Start(float delta_time) {
+
+	rote -= speed;
+
+	if (rote < 20 || rote >= 100)speed = -speed;
+
+	if (rote >= 70) { color = GetColor(0, 0, 0); Power = { gsRandf(-1,1),gsRandf(-1,1),gsRandf(-1,1) }; }
+	else if (rote >= 50) { color = GetColor(0, 0, 255); Power = { -0.2f,0.2f,0 }; }
+	else if (rote >= 30) { color = GetColor(0, 255, 0); Power = { -0.5f,0.5f,0 }; }
+	else { color = GetColor(255, 0, 0); Power = { -1,1,0 }; }
+
+	if (InputManager::GetInputDown(InputType::MOUSE, MOUSEEVENTF_LEFTDOWN)) {
+		camera = true;
+		state_ = State::Shot;
+	}
+}
+
+void Ball::Shot(float delta_time) {
+	int mx, my;
+	GetMousePoint(&mx, &my);
+
+	if (my < 0 && count == 0) {
+		physics_.AddForce(Power);
+		count++;
+		state_ = State::Move;
+	}
+}
+
+void Ball::Move(float delta_time) {
+	physics_.Update(delta_time);
+	count = 0;
+
+	GSvector3 pos = physics_.GetVelocity();
+
+	if (pos.x <= 0.005 && pos.x >= -0.005 && pos.z <= 0.005 && pos.z >= -0.005) {
+		camera = false;
+		state_ = State::Start;
+	}
+}
+
+bool Ball::getCamera() {
+	return camera;
 }
