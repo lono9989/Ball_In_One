@@ -5,6 +5,8 @@
 
 #include"IScene.h"
 #include "DxLib.h"
+#include "Mylib/Mylib.h"
+#include "Mylib/Tween/Tween.h"
 
 //タイトルシーン
 class TitleScene :public IScene {
@@ -27,8 +29,11 @@ public:
 private:
 	//終了フラグ
 	bool is_end_{ false };
-	float timer_{ 0.0f };
-	VECTOR start_position_{0.0f,0.0f,0.0f};
+
+	float start_timer_{ 0.0f };
+
+	GSvector3 logo_position;
+
 };
 
 #endif // !TITLE_SCENE_H_

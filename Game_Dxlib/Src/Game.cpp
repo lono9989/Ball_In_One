@@ -2,6 +2,7 @@
 #include "Scene/StartScene.h"
 #include "Scene/TitleScene.h"
 #include "Scene/GamePlayScene.h"
+#include "Mylib/Tween/Tween.h"
 
 Game::~Game() 
 {
@@ -33,6 +34,8 @@ void Game::Update(float delta_time)
 	InputManager::Update();
 	//シーンの更新
 	scene_manager_.update(delta_time);
+	//Tweenの更新
+	Tween::update(delta_time);
 }
 
 void Game::Draw()

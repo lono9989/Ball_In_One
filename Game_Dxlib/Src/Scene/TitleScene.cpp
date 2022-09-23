@@ -1,10 +1,11 @@
 #include "TitleScene.h"
 
-#include "Mylib/Mylib.h"
 #include "Mylib/DXlib_Input/InputManager.h"
 
 #include "Assets.h"
 #include "Rendering/Screen.h"
+
+
 
 void TitleScene::load()
 {
@@ -20,12 +21,19 @@ void TitleScene::start() {
 	//終了フラグの初期化
 	is_end_ = false;
 	PlaySoundMem(Assets::Sound_TitleBGM, DX_PLAYTYPE_LOOP);
+
+	logo_position = { 0.0f,-800.0f * Screen::Height / 1080,0.0f };
+	Tween::vector3(logo_position, GSvector3{ 0.0f,0.0f,0.0f }, 1.0f, [=](GSvector3 pos) {logo_position = pos; })
+		.ease(EaseType::EaseOutBack)
+		.overshoot(1.5f)
+		.name("logopos")
+		.delay(0.2f);
 }
 
 //更新
 void TitleScene::update(float delta_time) {
-	timer_ += delta_time;
-	start_position_.y = 10.0f * sinf(timer_ * 4.0f)*Screen::Height/1080;
+	start_timer_ += delta_time;
+
 	//エンターキー押したらシーン終了
 	if (InputManager::GetInputDown(InputType::KEY, KEY_INPUT_RETURN)) {
 		PlaySoundMem(Assets::Sound_TitleStart,DX_PLAYTYPE_NORMAL);
@@ -35,10 +43,12 @@ void TitleScene::update(float delta_time) {
 
 //描画
 void TitleScene::draw()const {
+
 	DrawExtendGraphF(0.0f, 0.0f, Screen::Width + 1.0f, Screen::Height + 1.0f, Assets::Texture_TitleBG, FALSE);
-	DrawExtendGraphF(0.0f, 0.0f, Screen::Width + 1.0f, Screen::Height + 1.0f, Assets::Texture_TitleLogo, TRUE);
-	DrawExtendGraphF(0.0f + start_position_.x, 0.0f + start_position_.y,
-		start_position_.x + Screen::Width + 1.0f, start_position_.y + Screen::Height + 1.0f, Assets::Texture_TitleStart, TRUE);
+
+	DrawExtendGraphF(0.0f+logo_position.x, 0.0f + logo_position.y, Screen::Width + 1.0f + logo_position.x, Screen::Height + 1.0f + logo_position.y, Assets::Texture_TitleLogo, TRUE);
+
+	DrawExtendGraphF(0.0f, 0.0f,Screen::Width + 1.0f, Screen::Height + 1.0f, Assets::Texture_TitleStart, TRUE);
 }
 
 //終了しているか？

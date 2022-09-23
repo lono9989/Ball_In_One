@@ -7,6 +7,8 @@
 #include"Collision/BoundingSphere.h"
 #include "Collision/Physics.h"
 
+#include "Mylib/Tween/Tween.h"
+
 class IWorld; //ワールド抽象インターフェイスの前方宣言
 
 //アクタークラス
@@ -52,6 +54,8 @@ public:
 	GSvector3 velocity()const;
 	//衝突判定データを所得
 	BoundingSphere collider()const;
+	// 指定された場所までTweenで移動する
+	TweenUnit& move_to(const GSvector3& to, float duration);
 
 	//コピー禁止
 	Actor(const Actor& other) = delete;

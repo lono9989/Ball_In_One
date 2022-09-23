@@ -3,6 +3,8 @@
 
 #include "DxLib.h"
 
+#include "Mylib/Tween/Tween.h"
+
 static SceneNull scene_null;// nullシーン（何もしないダミーシーン）
 
 // コンストラクタ
@@ -28,6 +30,7 @@ void SceneManager::update(float delta_time) {
 		load(current_scene_->next());
 		}
 		else if (GetASyncLoadNum() == 0) {
+			Tween::clear();
 			change(current_scene_->next());
 		}
 		if (GetASyncLoadNum() != 0) {
