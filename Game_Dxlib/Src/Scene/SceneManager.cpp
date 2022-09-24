@@ -48,7 +48,7 @@ void SceneManager::draw()const {
 	// Œ»İ‚ÌƒV[ƒ“‚ğ•`‰æ
 	current_scene_->draw();
 	
-	if (GetASyncLoadNum() != 0) {
+	if (change_load) {
 
 		// ”ñ“¯Šú“Ç‚İ‚İ‚Ì”‚ğ•`‰æ
 		DrawFormatString(200, 0, GetColor(255, 255, 255), "”ñ“¯Šú“Ç‚İ‚İ‚Ì” %d", GetASyncLoadNum());

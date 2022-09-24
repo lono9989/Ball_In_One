@@ -34,6 +34,9 @@ private:
 
 	GSvector3 logo_position;
 
+	int start_alpha_{ 0 };
+
+	bool logoanim_end{ false };
 };
 
 #endif // !TITLE_SCENE_H_
