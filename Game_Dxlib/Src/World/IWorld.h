@@ -28,6 +28,8 @@ public:
 	//メッセージの送信
 	virtual void send_message(const std::string& message, void* param = nullptr) = 0;
 
+	virtual void draw_actor() = 0;
+
 	//フィールドの所得
 	virtual Field* field() = 0;
 	//カメラの所得

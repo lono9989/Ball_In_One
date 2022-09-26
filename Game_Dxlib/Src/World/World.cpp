@@ -105,6 +105,12 @@ void World::send_message(const std::string& message, void* param) {
 	actors_.send_message(message, param);
 }
 
+void World::draw_actor()
+{
+	actors_.draw();
+	actors_.draw_transparent();
+}
+
 //ƒJƒƒ‰‚ÌŠ“¾
 Actor* World::camera() {
 	return camera_;

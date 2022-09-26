@@ -75,8 +75,12 @@ void GamePlayScene::update(float delta_time)
 void GamePlayScene::draw()const {
 	//スカイドームの描画
 	MV1DrawModel(Assets::Mesh_Skydome);
+	/*SetShadowMapLightDirection(shadow_map_, GetLightDirection());
+	SetShadowMapDrawArea(shadow_map_, VSub(GetCameraPosition(), VGet(10, 10, 10)), VAdd(GetCameraPosition(), VGet(10, 10, 10)));
+	ShadowMap_DrawSetup(shadow_map_);*/
+	
 	//シャドウマップの使用
-	//SetUseShadowMap(0, Shadow_Handle);
+	//SetUseShadowMap(0,shadow_map_ );
 	//ワールドの描画
 	world_.draw();
 	//シャドウマップの解除

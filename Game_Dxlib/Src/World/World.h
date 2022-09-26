@@ -40,6 +40,8 @@ public:
 	//メッセージの送信
 	virtual void send_message(const std::string& message, void* param = nullptr)override;
 
+	virtual void draw_actor()override;
+
 	//カメラの所得
 	virtual Actor* camera()override;
 	//ライトの所得

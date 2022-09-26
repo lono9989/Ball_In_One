@@ -29,6 +29,8 @@ private:
 	bool is_end_{ false };
 
 	bool is_backGround_{false};
+	
+	int shadow_map_{ -1 };
 };
 
 #endif // !GAME_PLAY_SCENE_H_
