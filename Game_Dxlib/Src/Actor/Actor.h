@@ -83,5 +83,20 @@ protected:
 	bool dead_{ false };
 };
 
+enum class CamState {
+	Ortho,  //正射影(シャドウマップ書き出し用)
+	TPS,    //三人称視点
+	FPS,    //一人称視点
+};
+struct CameraOptionData
+{
+public :
+	float Near;
+	float Far;
+	float FOV;
+	bool Perspective;
+	float Size;
+};
+
 #endif // !ACTOR_H_
 

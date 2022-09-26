@@ -7,12 +7,7 @@
 
 // 三人称カメラクラス
 class Camera : public Actor {
-public :
-    enum CamState{
-        Ortho,  //正射影(シャドウマップ書き出し用)
-        TPS,    //三人称視点
-        FPS,    //一人称視点
-    };
+
 public:
     // コンストラクタ
     Camera(IWorld* world, const GSvector3& position, const GSvector3& at);

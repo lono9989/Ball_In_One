@@ -191,6 +191,7 @@
     <ClCompile Include="Src\Mylib\Tween\Tween.cpp" />
     <ClCompile Include="Src\Mylib\Tween\Vector3Unit.cpp" />
     <ClCompile Include="Src\Scene\StartScene.cpp" />
+    <ClCompile Include="Src\Actor\Camera\OrthoCamera.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\Mylib\Debug.h" />
@@ -239,6 +240,7 @@
     <ClInclude Include="Src\Mylib\Tween\Tween.h" />
     <ClInclude Include="Src\Mylib\Tween\Vector3Unit.h" />
     <ClInclude Include="Src\Scene\StartScene.h" />
+    <ClInclude Include="Src\Actor\Camera\OrthoCamera.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

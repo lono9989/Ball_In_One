@@ -45,12 +45,12 @@ void Camera::update(float delta_time)
 {
 	switch (state_)
 	{
-	case Camera::Ortho:
+	case CamState::Ortho:
 		break;
-	case Camera::TPS:
+	case CamState::TPS:
 		update_Tps(delta_time, Ball::getCamera());
 		break;
-	case Camera::FPS:
+	case CamState::FPS:
 		update_Fps(delta_time);
 		break;
 	default:
