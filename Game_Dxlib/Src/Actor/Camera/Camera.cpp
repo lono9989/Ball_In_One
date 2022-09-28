@@ -5,7 +5,6 @@
 #include "Collision/Line.h"
 #include "Rendering/Field.h"
 #include "Mylib/Dxlib_Input/MouseInput.h"
-#include "Mylib/Dxlib_Input/MouseInput.h"
 #include "Ball.h"
 
 #include <string>
@@ -13,6 +12,7 @@
 
 // カメラの注視点の補正値
 const GSvector3 ReferencePointOffset{ 0.0f, 11.0f, 0.0f };
+const GSvector3 ReferenceBallPointOffset{ 0.0f, 3.0f, 0.0f };
 
 const float RotateSpeed{ 50.0f };
 const float ZoomSpeed{ 2.0f };
@@ -39,6 +39,8 @@ Camera::Camera(IWorld* world, const GSvector3& position, const GSvector3& at)
 	yaw_ = (at - position).getYaw();
 	MouseInput::GetMouseDif_and_SetPos(Screen::Width / 2, Screen::Height / 2);
 	SetupCamera_Perspective(DEG_TO_RAD(Fov_));
+
+	Actor::setViewActorName("Player");
 }
 
 void Camera::update(float delta_time)
@@ -48,7 +50,7 @@ void Camera::update(float delta_time)
 	case CamState::Ortho:
 		break;
 	case CamState::TPS:
-		update_Tps(delta_time, Ball::getCamera());
+		update_Tps(delta_time);
 		break;
 	case CamState::FPS:
 		update_Fps(delta_time);
@@ -70,17 +72,15 @@ void Camera::draw() const
 	SetCameraPositionAndTargetAndUpVec(eye.VECTOR_, at.VECTOR_, up.VECTOR_);
 }
 
-void Camera::update_Tps(float delta_time, bool ball)
+void Camera::update_Tps(float delta_time)
 {
-	Actor* player;
 	// プレーヤーを検索
-	if (!ball)player = world_->find_actor("Player");
-	else player = world_->find_actor("Ball");
+	Actor* actor = world_->find_actor(view_actor_name_);
 
-	if (player == nullptr) return;
+	if (actor == nullptr) return;
 	VECTOR vec = MouseInput::GetMouseDif_and_SetPos(Screen::Width / 2, Screen::Height / 2);
 
-	if (!ball) {
+	if (Ball::getCanMoveCamera()) {
 		// y軸まわりにカメラを回転させる
 		yaw_ += vec.x * RotateSpeed * delta_time;
 		// x軸まわりにカメラを回転させる
@@ -94,8 +94,8 @@ void Camera::update_Tps(float delta_time, bool ball)
 			pitch_ = CLAMP(pitch_, -75.0f, 85.0f - (10.0f - PlayerOffset.z) * 5.0f);
 		}
 	}
-	// 注視点の座標を求める
-	GSvector3 at = player->transform().position() + ReferencePointOffset;
+	//注視点の座標を求める
+	GSvector3 at = actor->transform().position() + (view_actor_name_ != "Ball" ? ReferencePointOffset : ReferenceBallPointOffset);
 	// カメラの座標を求める
 	GSvector3 position = at + GSquaternion::euler(pitch_, yaw_, 0.0f) * PlayerOffset;
 

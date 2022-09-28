@@ -1,5 +1,7 @@
 #include"Actor.h"
 
+std::string Actor::view_actor_name_;
+
 //更新
 void Actor::update(float) {};
 
@@ -57,6 +59,15 @@ const std::string& Actor::name()const {
 //タグ名を所得
 const std::string& Actor::tag()const {
 	return tag_;
+}
+
+const void Actor::setViewActorName(std::string viewActorName) {
+	view_actor_name_ = viewActorName;
+}
+
+//カメラが追ってる名前を所得
+const std::string& Actor::view_actor_name()const {
+	return view_actor_name_;
 }
 
 //トランスフォームを所得(const版)
