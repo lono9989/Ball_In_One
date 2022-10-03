@@ -6,7 +6,7 @@
 //重力加速度
 const float Gravity{ -0.980665f };
 //地面を転がっているときの減衰率(0が少ない→1が大きい)
-const float Attenuation{ 0.2f };
+const float Attenuation{ 0.4f };
 
 Physics::Physics()
 {
@@ -129,7 +129,7 @@ void Physics::CollideField(float delta_time)
 		}
 
 		//反射ベクトル(F=F+2aN)
-		velocity_ -= (2.0f * GSvector3::dot(velocity_, normV) * normV);
+		gsVector3Reflection(&velocity_, &velocity_, &normV);
 
 		//反発係数をもとに減衰
 		velocity_.y *= MAX(0.001f, CLAMP(((bounciness_ + world_->field()->Bounciness) / 2), 0.0f, 1.0f));
