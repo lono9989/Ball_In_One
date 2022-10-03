@@ -16,7 +16,7 @@ public:
     // •`‰æ
     virtual void draw() const override;
 
-    void update_Tps(float delta_time, bool ball);
+    void update_Tps(float delta_time);
 
     void update_Fps(float delta_time);
 

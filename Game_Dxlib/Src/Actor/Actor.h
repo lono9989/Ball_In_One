@@ -46,6 +46,10 @@ public:
 	const std::string& name()const;
 	//タグ名を所得
 	const std::string& tag()const;
+	//
+	const void setViewActorName(std::string viewActorName);
+	//タグ名を所得
+	const std::string& view_actor_name()const;
 	//トランスフォームを所得(const版)
 	const GStransform& transform()const;
 	//トランスフォームを所得
@@ -81,6 +85,8 @@ protected:
 	BoundingSphere collider_;
 	//死亡フラグ
 	bool dead_{ false };
+
+	static std::string view_actor_name_;
 };
 
 enum class CamState {

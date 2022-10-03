@@ -10,9 +10,10 @@ public:
 		Shot,
 		Move,
 	};
+
 public:
 	//コンストラクタ
-	Ball(IWorld* world = nullptr, const GSvector3& position = GSvector3{ 0.0f,0.0f,0.0f },float bounciness=0.7f);
+	Ball(IWorld* world = nullptr, const GSvector3& position = GSvector3{ 0.0f,0.0f,0.0f }, float bounciness = 0.7f);
 	//更新
 	virtual void update(float delta_time)override;
 	//
@@ -24,19 +25,25 @@ public:
 	void Shot(float delta_time);
 	void Move(float delta_time);
 
-	static bool getCamera();
+	static bool getCanMoveCamera();
 
 private:
 	int color;
 
-	int rote;
-	int speed;
+	int White = GetColor(255, 255, 255);
+	int Block = GetColor(0, 0, 0);
+	int Red = GetColor(255, 0, 0);
+	int Green = GetColor(0, 255, 0);
+	int Blue = GetColor(0, 0, 255);
+	int Gray = GetColor(128, 128, 128);
 
-	GSvector3 Power;
-
-	State state_;
+	int rote{ 100 };
+	int speed{ 1 };
 	int count;
-	static bool camera;
+	GSvector3 Power;
+	State state_;
+	GSvector2 circlePos{ 110, 400 };
+	static bool canMoveCamera;
 };
 
 
